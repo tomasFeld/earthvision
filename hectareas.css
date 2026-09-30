@@ -139,6 +139,12 @@ flex-shrink: 0;
 
 
 }
+
+.navbar .home-button{
+
+
+    background-color: #30ee17;
+}
 .navbar button:hover{
 
 

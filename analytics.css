@@ -1,0 +1,190 @@
+body {
+    margin: 0;
+    height: 100vh;           
+    display: flex;
+    flex-direction: column;   
+    justify-content: center;   
+    align-items: center;     
+    font-family: sans-serif;
+    background-color: #f4f4f9; 
+  }
+
+  body {
+    /* background-color: #8E8987; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 0;
+    justify-content: flex-start; 
+    align-items: stretch; 
+        background-image: url('background.jpg');
+        
+        background-repeat: no-repeat;
+        
+        background-size: cover;
+        
+        background-position: center;
+        
+        background-attachment: fixed;
+}
+
+
+.dashboard-container {
+    display: flex;
+    width: 250px;
+    height: 100vh;
+   
+    max-width: 1200px;
+    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.6);
+
+    min-height: 600px;
+     right: 50%;
+
+     border-top-right-radius: 90px;
+     align-self: flex-start; 
+     margin-left: 0;          
+     margin-right: auto;      
+    
+}
+
+.panel-izquierdo {
+    width: 100%;
+    padding: 30px;
+    
+    display: flex;
+    margin-right: auto;
+    
+    flex-direction: column;
+    gap: 20px;
+
+
+}
+
+
+.contenido-panel{
+
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+gap: 30px;
+
+
+}
+
+
+.navbar {
+
+display: flex;
+
+
+
+flex-direction: column;
+gap: 55px;
+margin-right: 0;
+flex-shrink: 0;
+
+}
+
+.navbar button{
+
+
+    border-radius: 30px;
+    background-color: transparent;
+    border-color: transparent;
+    transition: background-color 0.2s ease;
+    
+
+    display: flex;             
+    align-items: center;        
+    gap: 20px;                 
+    padding: 2px 15px;        
+    cursor: pointer;
+
+
+}
+
+.navbar .texto-boton{
+
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #f4f4f9;
+    font-size: 18px;
+    
+    
+}
+
+
+
+.navbar .analytics-button{
+
+
+    background-color: #30ee17;
+}
+.navbar button:hover{
+
+
+    background-color: #30ee17;
+
+
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+}
+
+.bloque-logo img {
+    width: 120px;       /* Ajusta este valor al tamaño que desees */
+    max-width: 100%;    /* Evita que se salga de su contenedor */
+    height: auto;       /* Mantiene la proporción de la imagen */
+    display: block;
+}
+
+
+
+.analytics-hover{
+
+    position: absolute;
+    top: 50%;
+    
+    left: 60%;
+    border-radius: 50px;
+    
+    transform: translate(-50%, -50%);
+    
+    width: 750px;
+    height: 500px; 
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    
+
+     
+}
+
+.ingredients-buttons{
+
+    position: absolute;
+    display: flex;
+    top: 15%;
+    gap: 50px;
+}
+.ingredients-buttons button{
+
+
+    width: 120px;
+    height: 55px;
+    background-color: black;
+    color: #f4f4f9;
+    border-color: transparent;
+    border-radius: 40px;
+    font-size: 23px;
+    font-family: 'Poppins', sans-serif;
+    font-style: italic;
+    font-weight: 500; 
+}

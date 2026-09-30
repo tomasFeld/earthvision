@@ -1,16 +1,24 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Earth Vision</title>
-    <link rel="stylesheet" href="hectareas.css">
+    <link rel="stylesheet" href="analytics.css">
+    <!-- En tu HTML <head> -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet">
+    
 </head>
 <body>
 
- <div class="dashboard-container">
-   
-     <div class="panel-izquierdo">
+
+
+
+
+
+<div class="dashboard-container">
+
+    <div class="panel-izquierdo">
         <div class="header-izquierdo">
             <div class="bloque-logo">
               
@@ -26,21 +34,29 @@
               <button class="home-button">
                 
                 <img src="Img/home.png" alt="home-image" width="60px">
+                <span class="texto-boton">Home</span>
+                
                 </button>
             </a>
             <a href="analytics.html">
-              <button>
+              <button class="analytics-button">
                 <img src="Img/analizis.png" alt="analizis-image" width="60px">
+                <span class="texto-boton">Analytics</span>
+                
               </button>
             </a>
             <a href="">
               <button>
                 <img src="Img/Clima.png" alt="weather-image" width="60px">
+                <span class="texto-boton">Weather</span>
+                
               </button>
             </a>
             <a href="">
               <button>
                 <img src="Img/ajustes.png" alt="settings-image" width="60px">
+                <span class="texto-boton">Setting</span>
+                
               </button>
             </a>
   
@@ -48,36 +64,7 @@
   
           </div>
   
-          <div class="tarjeta-campos">
-  
-  
-            <h1 class="titulo-campos">Tus campos</h1>
-            <div class="hectareas_button">
-  
-              
-              <div class="fila-tabla">
-                <a href="coordenadas.html">
-                  <button>Hectarea 1</button>
-                </a>
-              </div>
-              <div class="fila-tabla">
-                <a href="coordenadas.html">
-                  <button>Hectarea 2</button>
-                </a>
-              </div>
-              <div class="fila-tabla">
-                <a href="coordenadas.html">
-                  <button>Hectarea 3</button>
-                </a>
-              </div>
-              <div class="fila-tabla">
-                <a href="coordenadas.html">
-                  <button>Hectarea 4</button>
-                </a>
-              </div>
-  
-  
-            </div>
+          
         </div>
 
 
@@ -87,10 +74,42 @@
             
         </div>
      </div>
-            
-    
+</div>
 
- </div> 
+
+
+
+  <div class="analytics-hover">
+
+    <div class="ingredients-buttons">
+
+
+
+        <button class="Soja">
+            <span>Soja</span>
+
+        </button>
+
+        <button class="Maiz">
+            <span>Maiz</span>
             
+            
+        </button>
+
+        <button class="Trigo">
+            <span>Trigo</span>
+            
+        </button>
+
+        <button class="Girasol">
+            <span>Girasol</span>
+            
+        </button>
+    </div>
+
+
+  </div>
+    
+    
 </body>
 </html>
