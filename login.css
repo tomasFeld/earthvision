@@ -330,6 +330,23 @@ h3 {
   }
 }
 
+
+/* Un botón de envío por estado */
+.submit-signup {
+  display: none;
+}
+
+.page-wrapper.expanded ~ .submit-signup,
+.page-wrapper.expanded .submit-signup {
+  display: block;
+}
+
+.page-wrapper.expanded .submit-login {
+  display: none;
+}
+
+
+
 /* ---------- Accesibilidad ---------- */
 @media (prefers-reduced-motion: reduce) {
   .intro-section,
