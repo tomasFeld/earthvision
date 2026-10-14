@@ -1,0 +1,176 @@
+/* ========== UNIDAD ESCALABLE ========== */
+/* Diseño base: 1366 x 768. Todo se mide en múltiplos de --u */
+:root {
+    --u: min(100vw / 1366, 100vh / 768);
+    --sidebar-w: calc(var(--u) * 250);
+  }
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  
+  /* ========== BASE ========== */
+  body {
+    margin: 0;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    font-family: sans-serif;
+    background-color: #f4f4f9;
+    background-image: url('background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+  
+  /* ========== SIDEBAR ========== */
+  .dashboard-container {
+    display: flex;
+    width: var(--sidebar-w);
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-top-right-radius: calc(var(--u) * 90);
+    flex-shrink: 0;
+  }
+  
+  .panel-izquierdo {
+    width: 100%;
+    padding: calc(var(--u) * 30);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--u) * 20);
+  }
+  
+  .contenido-panel {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: calc(var(--u) * 30);
+  }
+  
+  .navbar {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--u) * 55);
+    flex-shrink: 0;
+  }
+  
+  /* ========== BOTONES DEL NAVBAR ========== */
+  .navbar button {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--u) * 20);
+    padding: calc(var(--u) * 2) calc(var(--u) * 15);
+    border: none;
+    border-radius: calc(var(--u) * 30);
+    background-color: transparent;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  
+  /* Íconos / imágenes dentro de los botones */
+  .navbar button img,
+  .navbar button svg {
+    width: calc(var(--u) * 80);
+    height: calc(var(--u) * 70);
+    flex-shrink: 0;
+    object-fit: contain;
+    display: block;
+  }
+  
+  .navbar .texto-boton {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+                 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #f4f4f9;
+    font-size: calc(var(--u) * 18);
+  }
+  
+  .navbar .setting-button,
+  .navbar button:hover {
+    background-color: #30ee17;
+  }
+  
+  /* ========== LOGO ========== */
+  .logo {
+    width: calc(var(--u) * 80);
+    height: auto;
+  }
+  
+  .bloque-logo img {
+    width: calc(var(--u) * 120);
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .config-hover{
+
+
+
+    position: absolute;
+    top: 50%;
+    /* centrado en el espacio libre a la derecha del sidebar */
+    left: calc(var(--sidebar-w) + (100% - var(--sidebar-w)) / 2);
+    transform: translate(-50%, -50%);
+  
+    width: calc(var(--u) * 750);
+    height: calc(var(--u) * 580);
+  
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border-radius: calc(var(--u) * 80);
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+.buttons-config {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.buttons-config button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 350px;
+    height: 80px;
+    padding: 0 25px;
+
+    background-color: rgba(0, 0, 0, 0.8);
+    border: none;
+    border-radius: 50px;
+    box-sizing: border-box;
+}
+
+.buttons-config .texto-boton {
+    font-family: Arial, sans-serif;
+    color: #f4f4f9;
+    font-size: calc(var(--u) * 18);
+    font-style: italic;
+}
+
+.buttons-config img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    margin-left: 15px;
+    flex-shrink: 0;
+}
+
+.buttons-config button:hover {
+    background-color: rgba(35, 35, 35, 0.9);
+    transition: background-color 0.2s ease;
+}
