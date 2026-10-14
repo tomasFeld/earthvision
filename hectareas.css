@@ -1,47 +1,4 @@
-h1 {
-    text-align: center;
-    font-size: 40px;
-}
-
-input {
-    display: block;
-    display: flex; 
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    width: 400px; 
-    height: 30px; 
-  }
-
-body {
-    margin: 0;
-    height: 100vh;           
-    display: flex;
-    flex-direction: column;   
-    justify-content: center;   
-    align-items: center;     
-    font-family: sans-serif;
-    background-color: #f4f4f9; 
-  }
-  
-
-  
-
-    
-
-h3 
-{
-    text-align: center;
-}
-
-#add
-{
-    text-align: center;
-    font-size: 16px;
-    
-}
-
-style
+/* ===== RESET (antes estaba roto: "style *" no aplicaba a nada) ===== */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -49,151 +6,145 @@ style
     font-family: Arial, sans-serif;
 }
 
+/* ===== BASE ===== */
+h1 {
+    text-align: center;
+    font-size: clamp(26px, 4vw, 40px);
+}
 
+h3 {
+    text-align: center;
+}
 
+input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 400px;
+    max-width: 100%;
+    height: 30px;
+}
+
+#add {
+    text-align: center;
+    font-size: 16px;
+}
 
 body {
-    /* background-color: #8E8987; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
     min-height: 100vh;
-    padding: 0;
-    justify-content: flex-start; 
-    align-items: stretch; 
-        background-image: url('background.jpg');
-        
-        background-repeat: no-repeat;
-        
-        background-size: cover;
-        
-        background-position: center;
-        
-        background-attachment: fixed;
+    min-height: 100dvh;              /* en celulares evita el salto de la barra del navegador */
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    background-color: #f4f4f9;
+    background-image: url('background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
+
+/* ===== PANEL IZQUIERDO ===== */
 .dashboard-container {
     display: flex;
-    width: 550px;
-    height: 100vh;
-   
-    max-width: 1200px;
-    background-color: #000000;
+    width: clamp(320px, 40vw, 550px);   /* se adapta: mínimo 320, ideal 40% de la pantalla, máximo 550 */
+    min-height: 100vh;
+    min-height: 100dvh;
     background-color: rgba(0, 0, 0, 0.6);
-
-    min-height: 600px;
-     right: 50%;
-
-     border-top-right-radius: 90px;
-     align-self: flex-start; 
-     margin-left: 0;          
-     margin-right: auto;      
-    
+    border-top-right-radius: clamp(40px, 6vw, 90px);
+    align-self: flex-start;
+    margin-left: 0;
+    margin-right: auto;
 }
 
 .panel-izquierdo {
     width: 100%;
-    padding: 30px;
-    
+    padding: clamp(14px, 2.5vw, 30px);
     display: flex;
-    margin-right: auto;
-    
     flex-direction: column;
-    gap: 20px;
-
-
+    gap: clamp(12px, 2vw, 20px);
 }
 
-
-.contenido-panel{
-
-display: flex;
-flex-direction: row;
-align-items: flex-start;
-gap: 30px;
-
-
+.header-izquierdo {
+    display: flex;
+    align-items: flex-start;
+    gap: clamp(16px, 3vw, 40px);
 }
 
+.contenido-panel {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: clamp(14px, 2.5vw, 30px);
+}
 
+/* ===== NAVBAR ===== */
 .navbar {
-
-display: flex;
-
-
-
-flex-direction: column;
-gap: 55px;
-margin-right: 0;
-flex-shrink: 0;
-
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 5vh, 55px);        /* depende del alto de la pantalla */
+    flex-shrink: 0;
 }
 
-.navbar button{
-
-
+.navbar button {
     border-radius: 12px;
     background-color: transparent;
     border-color: transparent;
     transition: background-color 0.2s ease;
-
-
-
 }
 
-.navbar .home-button{
-
-
+.navbar .home-button {
     background-color: #30ee17;
 }
-.navbar button:hover{
 
-
+.navbar button:hover {
     background-color: #30ee17;
-
-
 }
 
-.tarjeta-campos{
-
-
+/* ===== TARJETA DE CAMPOS ===== */
+.tarjeta-campos {
     display: flex;
     flex-direction: column;
     align-items: center;
     flex-grow: 1;
-    gap: 45px;
+    min-width: 0;                        /* permite que se encoja dentro del flex */
+    gap: clamp(20px, 5vh, 45px);
 }
 
+.titulo-campos {
+    width: min(250px, 100%);
+    background-color: #157a0f;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 6px 0;
+    margin: 0 auto;
+    text-align: center;
+}
 
 .hectareas_button {
-    background-color: rgba(40, 40, 40, 0.6); 
+    background-color: rgba(40, 40, 40, 0.6);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
-
-    
-    width: 250px;            
+    width: min(250px, 100%);
     height: auto;
-    margin: 10px auto;       
-    
-    padding: 20px 15px;      
-    box-sizing: border-box;
-
+    margin: 10px auto;
+    padding: 20px 15px;
     display: flex;
     flex-direction: column;
-    align-items: center;     
-    gap: 15px;               
+    align-items: center;
+    gap: 15px;
 }
 
 .hectareas_button button {
-    background-color: #666666; 
+    background-color: #666666;
     color: #ffffff;
     border: none;
     border-radius: 5px;
     font-size: 15px;
     cursor: pointer;
     transition: background-color 0.2s;
-
-
-    width: 200px;            
+    width: 200px;
     height: 38px;
     box-sizing: border-box;
 }
@@ -202,17 +153,20 @@ flex-shrink: 0;
     background-color: #888888;
 }
 
-.titulo-campos {
-    width: 250px;               
-    background-color: #157a0f;
-    color: #ffffff;  
-    font-size: 16px;
-    padding: 6px 0;
-    margin: 0 auto;             
-    text-align: center;         
+/* ===== LOGO ===== */
+.logo {
+    width: clamp(60px, 8vw, 80px);
+    height: clamp(60px, 8vw, 80px);
 }
 
+.bloque-logo img {
+    width: clamp(80px, 9vw, 120px);
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
 
+/* ===== COMPONENTES VARIOS ===== */
 .bloque-gris {
     background-color: #D1CDCC;
     color: #000;
@@ -224,27 +178,8 @@ flex-shrink: 0;
     padding: 8px 12px;
 }
 
-.header-izquierdo {
-    display: flex;
-    align-items: flex-start;
-    gap: 40px;
-}
-
-
-.logo {
-    width: 80px;
-    height: 80px;
-}
-
-.bloque-logo img {
-    width: 120px;       /* Ajusta este valor al tamaño que desees */
-    max-width: 100%;    /* Evita que se salga de su contenedor */
-    height: auto;       /* Mantiene la proporción de la imagen */
-    display: block;
-}
-
 .selector-hectarea {
-    width: 160px;
+    width: min(160px, 100%);
     height: 35px;
     margin-top: 20px;
 }
@@ -255,12 +190,10 @@ flex-shrink: 0;
     margin-top: 28px;
 }
 
-
 .tarjeta-datos {
-    background-color: #B8B3F2; 
-    background-color: #B5B0AE; 
+    background-color: #B5B0AE;
     border: 1px solid #777;
-    padding: 20px;
+    padding: clamp(12px, 2vw, 20px);
     margin: 0 auto;
     width: 90%;
     display: flex;
@@ -269,15 +202,13 @@ flex-shrink: 0;
 }
 
 .titulo-datos {
-    width: 140px;
+    width: min(140px, 100%);
     height: 35px;
     margin: 0 auto 10px auto;
 }
 
-
-
 .col-texto {
-    width: 110px;
+    width: clamp(80px, 25%, 110px);
     height: 35px;
     justify-content: flex-start;
     padding-left: 10px;
@@ -301,11 +232,12 @@ flex-shrink: 0;
     width: 70%;
     height: 40px;
     margin: 0 auto;
-    font-size: 18px;
+    font-size: clamp(14px, 2vw, 18px);
 }
 
 .barra-tiempo {
     display: flex;
+    flex-wrap: wrap;                     /* en pantallas chicas los botones pasan a otra línea */
     gap: 10px;
     align-items: center;
 }
@@ -328,102 +260,171 @@ flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 42px;
+    font-size: clamp(24px, 4vw, 42px);
     color: #000;
-    min-height: 400px;
+    min-height: clamp(260px, 50vh, 400px);
+}
 
-    .dashboard-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr; /* Divide la pantalla en dos mitades exactas */
-      width: 100vw;
-      height: 100vh; /* Ocupa toda la pantalla visible */
-      background-color: #a39d9e; /* Color gris de fondo general del boceto */
-      position: fixed; /* Se superpone correctamente cubriendo el fondo del body */
-      top: 0;
-      left: 0;
-  }
-  
-  .dashboard-container::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 50%;
-      width: 2px;
-      height: 100%;
-      background-color: #000000; 
-  }
-  
-  .dashboard-container .panel-izquierdo {
-      padding: 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-  }
-  
-  .dashboard-container .logo {
-      background-color: #e0e0e0;
-      width: 110px;
-      height: 90px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: bold;
-      font-size: 14px;
-      color: #000;
-  }
-  
-  .dashboard-container .tarjeta-campos {
+/* ===== VISTA MAPA (antes estaba anidada dentro de .contenedor-mapa por una llave sin cerrar,
+   por eso nunca se aplicaba). Ahora se activa agregando class="vista-mapa" al <body>. ===== */
+body.vista-mapa .dashboard-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 0;
+    border-radius: 0;
+    background-color: #a39d9e;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+body.vista-mapa .dashboard-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    background-color: #000;
+}
+
+body.vista-mapa .dashboard-container .panel-izquierdo {
+    padding: clamp(16px, 3vw, 40px);
+    gap: clamp(16px, 3vw, 40px);
+    overflow-y: auto;
+}
+
+body.vista-mapa .dashboard-container .logo {
+    background-color: #e0e0e0;
+    width: clamp(80px, 9vw, 110px);
+    height: clamp(65px, 7vw, 90px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 14px;
+    color: #000;
+}
+
+body.vista-mapa .dashboard-container .tarjeta-campos {
     background-color: #c2bcbd;
     padding: 30px 25px;
     border-radius: 4px;
-    display: flex;
-    flex-direction: column;
     gap: 20px;
     width: 100%;
     max-width: 380px;
-  }
-  
+    align-items: stretch;
+}
 
-  .dashboard-container .titulo-campos {
+body.vista-mapa .dashboard-container .titulo-campos {
     background-color: #e0e0e0;
     padding: 14px 20px;
     font-size: 15px;
     color: #000;
     width: 100%;
     text-align: right;
-  }
-  
-  .dashboard-container .fila-tabla {
-      background-color: #e0e0e0;
-      padding: 14px 20px;
-      font-size: 15px;
-      color: #000;
-      width: 100%;
-      text-align: left;
-  }
-  
+}
 
-  .dashboard-container .hectarea-1 {
-      font-style: italic;
-  }
-  
-  .dashboard-container .panel-derecho {
-      padding: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-  }
-  
-  .dashboard-container .contenedor-mapa {
-      background-color: #e0e0e0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 56px; 
-      color: #000;
-  }
+body.vista-mapa .dashboard-container .fila-tabla {
+    background-color: #e0e0e0;
+    padding: 14px 20px;
+    font-size: 15px;
+    color: #000;
+    width: 100%;
+    text-align: left;
+}
 
+body.vista-mapa .dashboard-container .hectarea-1 {
+    font-style: italic;
+}
+
+body.vista-mapa .dashboard-container .panel-derecho {
+    padding: clamp(16px, 3vw, 40px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+body.vista-mapa .dashboard-container .contenedor-mapa {
+    background-color: #e0e0e0;
+    width: 100%;
+    height: 100%;
+    font-size: clamp(28px, 5vw, 56px);
+}
+
+/* ===== TABLET (hasta 900px) ===== */
+@media (max-width: 900px) {
+    .dashboard-container {
+        width: clamp(300px, 55vw, 480px);
+    }
+}
+
+/* ===== CELULAR (hasta 640px) ===== */
+@media (max-width: 640px) {
+    body {
+        background-attachment: scroll;   /* "fixed" falla en muchos celulares */
+    }
+
+    .dashboard-container {
+        width: 100%;
+        border-top-right-radius: 0;
+        align-self: stretch;
+    }
+
+    .contenido-panel {
+        flex-direction: column;
+    }
+
+    /* la barra de iconos pasa a horizontal arriba del contenido */
+    .navbar {
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+        gap: 12px;
+    }
+
+    .tarjeta-campos {
+        width: 100%;
+    }
+
+    .titulo-campos,
+    .hectareas_button {
+        width: 100%;
+    }
+
+    .tarjeta-datos {
+        width: 100%;
+    }
+
+    /* vista mapa: se apilan los dos paneles */
+    body.vista-mapa .dashboard-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        height: auto;
+        min-height: 100dvh;
+        position: absolute;
+    }
+
+    body.vista-mapa .dashboard-container::after {
+        display: none;
+    }
+
+    body.vista-mapa .dashboard-container .panel-derecho {
+        height: 60vh;
+    }
+}
+
+/* ===== PANTALLAS BAJAS (laptops chicas / celular horizontal) ===== */
+@media (max-height: 600px) {
+    .navbar {
+        gap: 14px;
+    }
+
+    .dashboard-container {
+        overflow-y: auto;
+    }
 }
