@@ -73,26 +73,26 @@
 
                 <div class="buttons-config">
 
-                    <button class="perfil-button">
+                    <button class="perfil-button" id="abrir-usuario">
                         
                         <span class="texto-boton">Usuario</span>
                         <img src="Img/flecha-correcta-3d-icon-png-download-4206421.png" alt="">
     
                     </button>
     
-                    <button class="config-button">
+                    <button class="config-button" id="abrir-perfil">
                         
                         <span class="texto-boton">Perfil</span>
                         <img src="Img/flecha-correcta-3d-icon-png-download-4206421.png" alt="">
                     </button>
     
-                    <button class="config-button">
+                    <button class="config-button" id="abrir-idioma">
                         <span class="texto-boton">Idioma</span>
                         <img src="Img/flecha-correcta-3d-icon-png-download-4206421.png" alt="">
                         
                     </button>
     
-                    <button class="config-button">
+                    <button class="config-button" id="abrir-modal">
                         
                         <span class="texto-boton">Cerrar sesion</span>
                         <img src="Img/flecha-correcta-3d-icon-png-download-4206421.png" alt="">
@@ -115,6 +115,169 @@
 
   
     
+<!-- Ventana de confirmación -->
+<div class="modal-overlay" id="modal-cerrar-sesion">
+
+  <div class="modal-sesion">
+
+      <button class="cerrar-modal" id="cancelar-x" aria-label="Cerrar">×</button>
+
+      <h2>Cerrar Sesión</h2>
+
+      <p>¿Estás seguro de que querés cerrar sesión?</p>
+
+      <div class="botones-modal">
+          <button class="boton-cancelar" id="cancelar-sesion">
+              Cancelar
+          </button>
+
+          <button class="boton-confirmar" id="confirmar-sesion">
+              Cerrar Sesión
+          </button>
+      </div>
+
+  </div>
+
+</div>
+
+
+<!-- CUADRO USUARIO -->
+<div class="modal-overlay" id="modal-usuario">
+  <div class="modal-sesion">
+      <button class="cerrar-modal" data-cerrar="modal-usuario">×</button>
+
+      <h2>Usuario</h2>
+      <p>Información de tu cuenta</p>
+
+      <div class="datos-cuenta">
+          <p><strong>Nombre:</strong> Usuario</p>
+          <p><strong>Correo:</strong> usuario@gmail.com</p>
+      </div>
+
+      <button class="boton-cancelar" data-cerrar="modal-usuario">
+          Cerrar
+      </button>
+  </div>
+</div>
+
+
+<!-- CUADRO PERFIL -->
+<div class="modal-overlay" id="modal-perfil">
+  <div class="modal-sesion">
+      <button class="cerrar-modal" data-cerrar="modal-perfil">×</button>
+
+      <h2>Perfil</h2>
+      <p>Modificá tus datos personales</p>
+
+      <label for="nombre-perfil">Nombre</label>
+      <input type="text" id="nombre-perfil" placeholder="Tu nombre">
+
+      <label for="correo-perfil">Correo electrónico</label>
+      <input type="email" id="correo-perfil" placeholder="Tu correo">
+
+      <button class="boton-confirmar" data-cerrar="modal-perfil">
+          Guardar
+      </button>
+  </div>
+</div>
+
+
+<!-- CUADRO IDIOMA -->
+<div class="modal-overlay" id="modal-idioma">
+  <div class="modal-sesion">
+      <button class="cerrar-modal" data-cerrar="modal-idioma">×</button>
+
+      <h2>Idioma</h2>
+      <p>Elegí el idioma de Earth Vision</p>
+
+      <select id="seleccionar-idioma">
+          <option value="es">Español</option>
+          <option value="en">English</option>
+          <option value="pt">Português</option>
+      </select>
+
+      <button class="boton-confirmar" data-cerrar="modal-idioma">
+          Aceptar
+      </button>
+  </div>
+</div>
+
+
+<script>
+  const botonAbrir = document.getElementById("abrir-modal");
+  const modal = document.getElementById("modal-cerrar-sesion");
+  const botonCancelar = document.getElementById("cancelar-sesion");
+  const botonCerrarX = document.getElementById("cancelar-x");
+  const botonConfirmar = document.getElementById("confirmar-sesion");
+
+  // Abrir la ventana
+  botonAbrir.addEventListener("click", () => {
+      modal.classList.add("activo");
+  });
+
+  // Cerrar la ventana
+  botonCancelar.addEventListener("click", () => {
+      modal.classList.remove("activo");
+  });
+
+  botonCerrarX.addEventListener("click", () => {
+      modal.classList.remove("activo");
+  });
+
+  // Cerrar al hacer clic fuera de la ventana
+  modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+          modal.classList.remove("activo");
+      }
+  });
+
+  // Confirmar el cierre de sesión
+  botonConfirmar.addEventListener("click", () => {
+      window.location.href = "login.html";
+  });
+
+  // Cerrar con Escape
+  document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+          modal.classList.remove("activo");
+      }
+  });
+
+  
+/* ABRIR LOS CUADROS */
+document.getElementById("abrir-usuario").addEventListener("click", () => {
+    document.getElementById("modal-usuario").classList.add("activo");
+});
+
+document.getElementById("abrir-perfil").addEventListener("click", () => {
+    document.getElementById("modal-perfil").classList.add("activo");
+});
+
+document.getElementById("abrir-idioma").addEventListener("click", () => {
+    document.getElementById("modal-idioma").classList.add("activo");
+});
+
+
+/* CERRAR CON LA X O CON LOS BOTONES */
+document.querySelectorAll("[data-cerrar]").forEach(boton => {
+    boton.addEventListener("click", () => {
+        const id = boton.getAttribute("data-cerrar");
+        document.getElementById(id).classList.remove("activo");
+    });
+});
+
+
+/* CERRAR AL HACER CLIC AFUERA */
+document.querySelectorAll(".modal-overlay").forEach(modal => {
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            modal.classList.remove("activo");
+        }
+    });
+});
+
+</script>
+
 
 
   
