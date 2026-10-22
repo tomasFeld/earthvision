@@ -1,0 +1,18 @@
+body {
+
+
+    
+
+    background-image: url('background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.menu-lateral{
+
+
+    
+    background-color: black;
+}
