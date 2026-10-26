@@ -124,6 +124,36 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 ).addTo(map);
 
+L.tileLayer(
+  "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}",
+  { maxZoom: 19 }
+).addTo(map);
+
+L.tileLayer(
+  "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
+  { maxZoom: 19 }
+).addTo(map);
+
+
+let marcador = null;
+
+L.Control.geocoder({
+  defaultMarkGeocode: false,
+  placeholder: "Buscar calle o dirección...",
+  geocoder: L.Control.Geocoder.nominatim({
+    geocodingQueryParams: { countrycodes: "ar" },
+  }),
+})
+  .on("markgeocode", function (e) {
+    const centro = e.geocode.center;
+
+    if (marcador) map.removeLayer(marcador);
+    marcador = L.marker(centro).addTo(map);
+
+    map.fitBounds(e.geocode.bbox);
+  })
+  .addTo(map);
+
           map.on("click", (e) => {
             const { lat, lng } = e.latlng;
             selectedLat = lat;
