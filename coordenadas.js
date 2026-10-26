@@ -2,7 +2,7 @@ const API = "http://localhost:3000";
 
 // Fecha "base" desde la que se retrocede. ERA5 tiene retraso,
 // así que la base no es hoy. Si aplicaste el arreglo del server, podés bajarlo.
-const DIAS_ATRAS_BASE = 120;
+const DIAS_ATRAS_BASE = 4;
 
 let mapa = null;
 let marcador = null;
