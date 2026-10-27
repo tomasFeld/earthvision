@@ -310,6 +310,28 @@ h3 {
   margin: 0;
 }
 
+
+.text-option{
+
+
+  display: flex;
+  gap: 3px;
+}
+
+.info-text-login{
+  color: #fff;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.login-text{
+  color: #002df8;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  text-decoration: underline;
+  cursor: pointer;
+
+}
+
+
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
   .intro-section {
