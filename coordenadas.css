@@ -238,3 +238,24 @@ body {
     border-radius: 8px;
     font-size: 14px;
 }
+
+/* El panel lateral nunca es más alto que la ventana y se desplaza si hace falta */
+@media (min-width: 901px) {
+    .menu-lateral {
+        max-height: 100vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-width: thin;
+        scrollbar-color: #0f6b1a transparent;
+    }
+}
+
+/* Pantallas bajas (laptops chicas, ventanas achicadas): todo más compacto */
+@media (min-width: 901px) and (max-height: 760px) {
+    .ferility-text { font-size: 22px !important; }
+    .hectarea { margin: 0 !important; }
+    .fertilidad { padding-top: 6px !important; }
+    .tabla-contenedor { padding: 6px !important; }
+    .tabla-fila { margin-bottom: 6px !important; }
+    .caja-gris { font-size: 13px !important; padding: 4px 8px !important; }
+}

@@ -2,7 +2,7 @@ const API = "http://localhost:3000";
 
 // Fecha "base" desde la que se retrocede. ERA5 tiene retraso,
 // así que la base no es hoy. Si aplicaste el arreglo del server, podés bajarlo.
-const DIAS_ATRAS_BASE = 4;
+const DIAS_ATRAS_BASE = 7;
 
 let mapa = null;
 let marcador = null;
@@ -133,6 +133,11 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!user) {
     window.location.href = "index.html";
     return;
+
+
+    window.addEventListener("resize", () => {
+      if (mapa) mapa.invalidateSize();
+    });
   }
 
   const lat = Number(user.fieldCoordenatesLat);
