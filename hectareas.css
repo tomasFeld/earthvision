@@ -1,215 +1,212 @@
-:root {
-    --u: min(100vw / 1366, 100vh / 768);
-    --sidebar-w: calc(var(--u) * 250);
-  }
-  
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
-  
-  /* ========== BASE ========== */
-  body {
-    margin: 0;
-    height: 100vh;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    font-family: sans-serif;
-    background-color: #f4f4f9;
-    background-image: url('background.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-  }
-  
-  /* ========== SIDEBAR ========== */
-  .dashboard-container {
-    display: flex;
-    width: var(--sidebar-w);
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.6);
-    border-top-right-radius: calc(var(--u) * 90);
-    flex-shrink: 0;
-  }
-  
-  .panel-izquierdo {
-    width: 100%;
-    padding: calc(var(--u) * 30);
-    display: flex;
-    flex-direction: column;
-    gap: calc(var(--u) * 20);
-  }
-  
-  .contenido-panel {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: calc(var(--u) * 30);
-  }
-  
-  .navbar {
-    display: flex;
-    flex-direction: column;
-    gap: calc(var(--u) * 55);
-    flex-shrink: 0;
-  }
-  
-  /* ========== BOTONES DEL NAVBAR ========== */
-  .navbar button {
-    display: flex;
-    align-items: center;
-    gap: calc(var(--u) * 20);
-    padding: calc(var(--u) * 2) calc(var(--u) * 15);
-    border: none;
-    border-radius: calc(var(--u) * 30);
-    background-color: transparent;
-    transition: background-color 0.2s ease;
-    cursor: pointer;
-    line-height: 1;
-    white-space: nowrap;
-  }
-  
-  /* Íconos / imágenes dentro de los botones */
-  .navbar button img,
-  .navbar button svg {
-    width: calc(var(--u) * 80);   /* ajustá 40 al tamaño real de tu ícono */
-    height: calc(var(--u) * 70);
-    flex-shrink: 0;
-    object-fit: contain;
-    display: block;
-  }
-  
-  .navbar .texto-boton {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-                 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    color: #f4f4f9;
-    font-size: calc(var(--u) * 18);
-  }
-  
-  .navbar .home-button,
-  .navbar button:hover {
-    background-color: #30ee17;
-  }
-  
-  /* ========== LOGO ========== */
-  .logo {
-    width: calc(var(--u) * 80);
-    height: auto;
-  }
-  
-  .bloque-logo img {
-    width: calc(var(--u) * 120);
-    max-width: 100%;
-    height: auto;
-    display: block;
-  }
-
-
-  .hectareas-hover{
-
-
-    position: absolute;
-    top: 50%;
-   
-    left: calc(var(--sidebar-w) + (100% - var(--sidebar-w)) / 2);
-    transform: translate(-50%, -50%);
-  
-    width: calc(var(--u) * 750);
-    height: calc(var(--u) * 700);
-  
-    background-color: rgba(0, 0, 0, 0.6);
-    color: white;
-    border-radius: calc(var(--u) * 80);
-  
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .hct_btn_hover{
-
-    position: absolute;
-    top: 30%;
-   
-  
-    
-  
-    width: calc(var(--u) * 550);
-    height: calc(var(--u) * 450);
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    border-radius: calc(var(--u) * 80);
-  
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 40px;
-
-    flex-direction: column;
-    gap: 20px;
-
-
-  }
-
-  .hct_btn{
-
-    background-color: #6d696a;
-    color: #fff;
-    font-style: 'Poppins', sans-serif;
-    
-
-    border-radius: 50px; 
-    border: none;
-
-    width: calc(var(--u) * 400);
-  height: calc(var(--u) * 50);
-
-  font-size: 16px;
-  
-  
-
-  
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  
-  cursor: pointer;
-
-    
-  }
-
-  
-  .agr_hct_button{
-
-    background-color: rgb(13, 110, 23);;
-    color: #fff;
-    font-style: 'Poppins', sans-serif;
-    
-    white-space: nowrap;
-
-    border-radius: 50px; 
-    border: none;
-
-    
-  font-size: 16px;
-  
-  width: calc(var(--u) * 400);
-  height: calc(var(--u) * 50);
-  
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  
-  cursor: pointer;
-
-
-    
-  }
-
-  .hct_text {
-    
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
+
+/* ========== BASE ========== */
+body {
+  margin: 0;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f4f4f9;
+  background-image: url('background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* ========== SIDEBAR (BARRA LATERAL) ========== */
+.dashboard-container {
+  display: flex;
+  width: 250px;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-top-right-radius: 60px;
+  flex-shrink: 0;
+}
+
+.panel-izquierdo {
+  width: 100%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contenido-panel {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  flex-shrink: 0;
+}
+
+.navbar a {
+  text-decoration: none;
+}
+
+/* ========== BOTONES DEL NAVBAR ========== */
+.navbar button {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 30px;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  line-height: 1;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.navbar button img,
+.navbar button svg {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  object-fit: contain;
+  display: block;
+}
+
+.navbar .texto-boton {
+  color: #f4f4f9;
+  font-size: 18px;
+}
+
+.navbar .home-button,
+.navbar button:hover {
+  background-color: #30ee17;
+}
+
+/* ========== LOGO IZQUIERDO ========== */
+.bloque-logo img {
+  width: 100px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ========== PANEL CENTRAL DER. ========== */
+.hectareas-hover {
+  position: absolute;
+  top: 50%;
+  left: calc(50% + 125px); /* Centrado automático compensando el menú de 250px */
+  transform: translate(-50%, -50%);
+
+  width: 600px;
+  max-width: 90vw;
+  padding: 30px 20px;
+
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border-radius: 50px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ========== LOGO SUPERIOR CENTRAL ========== */
+.bloque-logo-hover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 50%;
+  padding: 10px;
+  width: 90px;
+  height: 90px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.bloque-logo-hover img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ========== TÍTULO VERDE ("TUS CAMPOS") ========== */
+.hct_text {
+  margin: 0;
+  width: 80%;
+  background-color: rgb(13, 110, 23);
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 15px;
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* ========== CAJA DE BOTONES INTERNA ========== */
+.hct_btn_hover {
+  width: 450px;
+  max-width: 90%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  border-radius: 40px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 30px 20px;
+  gap: 15px;
+}
+
+/* ========== BOTONES INDIVIDUALES DE HECTÁREAS ========== */
+.hct_btn {
+  background-color: #6d696a;
+  color: #fff;
+  border-radius: 50px;
+  border: none;
+  width: 100%;
+  max-width: 350px;
+  height: 45px;
+  font-size: 16px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  
+  
+}
+
+
+  
+
+
+.agr_hct_button {
+  background-color: rgb(13, 110, 23);
+  color: #fff;
+  white-space: nowrap;
+  border-radius: 50px;
+  border: none;
+  font-size: 16px;
+  width: 100%;
+  max-width: 350px;
+  height: 45px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
 
