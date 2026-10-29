@@ -27,16 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const mostrar = (texto) => { if (responseText) responseText.textContent = texto; };
 
-  // 1. Animación: expandir tarjeta (modo registro)
-  if (triggerSignup && pageWrapper) {
-    triggerSignup.addEventListener("click", () => pageWrapper.classList.add("expanded"));
-  }
-  // Volver al modo login
-  if (loginTab && pageWrapper) {
-    loginTab.addEventListener("click", () => pageWrapper.classList.remove("expanded"));
-  }
-
-  // 2. LOGIN
+ 
+  //LOGIN
   if (btnLoginSubmit) {
     btnLoginSubmit.addEventListener("click", async () => {
       try {
@@ -55,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
 
-        // Guardamos el usuario para usarlo en app.html
+
         localStorage.setItem("user", JSON.stringify(data.usuario));
         window.location.href = "hectareas.html";
       } catch (err) {
@@ -65,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 3. REGISTRO
+  //REGISTRO
   if (btnSignupSubmit) {
     btnSignupSubmit.addEventListener("click", async () => {
       if (!emailInput.value.trim() || !passwordInput.value) {
@@ -107,7 +99,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 4. MAPA (Leaflet)
+ 
+
+
+
   if (btnOpenMap && mapModal && btnCloseMap) {
     btnOpenMap.addEventListener("click", () => {
       mapModal.classList.add("active");
@@ -163,7 +158,7 @@ L.Control.geocoder({
             else marker = L.marker(e.latlng).addTo(map);
 
             fieldCoordsInput.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
-            // El backend analiza un cuadrado de 600 m x 600 m alrededor del punto
+         
             fieldAreaInput.value = "360000 m²";
 
             setTimeout(() => mapModal.classList.remove("active"), 600);
