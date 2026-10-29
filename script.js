@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Guardamos el usuario para usarlo en app.html
         localStorage.setItem("user", JSON.stringify(data.usuario));
-        window.location.href = "app.html";
+        window.location.href = "hectareas.html";
       } catch (err) {
         console.error(err);
         mostrar("No se pudo conectar con el servidor (¿está encendido en el puerto 3000?)");
