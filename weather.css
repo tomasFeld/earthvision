@@ -1,188 +1,239 @@
-/* ========== UNIDAD ESCALABLE ========== */
-/* Diseño base: 1366 x 768. Todo se mide en múltiplos de --u */
-:root {
-    --u: min(100vw / 1366, 100vh / 768);
-    --sidebar-w: calc(var(--u) * 250);
-  }
-  
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
-  
-  /* ========== BASE ========== */
-  body {
-    margin: 0;
-    height: 100vh;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    font-family: sans-serif;
-    background-color: #f4f4f9;
-    background-image: url('background.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-  }
-  
-  /* ========== SIDEBAR ========== */
-  .dashboard-container {
-    display: flex;
-    width: var(--sidebar-w);
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.6);
-    border-top-right-radius: calc(var(--u) * 90);
-    flex-shrink: 0;
-  }
-  
-  .panel-izquierdo {
-    width: 100%;
-    padding: calc(var(--u) * 30);
-    display: flex;
-    flex-direction: column;
-    gap: calc(var(--u) * 20);
-  }
-  
-  .contenido-panel {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: calc(var(--u) * 30);
-  }
-  
-  .navbar {
-    display: flex;
-    flex-direction: column;
-    gap: calc(var(--u) * 55);
-    flex-shrink: 0;
-  }
-  
-  /* ========== BOTONES DEL NAVBAR ========== */
-  .navbar button {
-    display: flex;
-    align-items: center;
-    gap: calc(var(--u) * 20);
-    padding: calc(var(--u) * 2) calc(var(--u) * 15);
-    border: none;
-    border-radius: calc(var(--u) * 30);
-    background-color: transparent;
-    transition: background-color 0.2s ease;
-    cursor: pointer;
-    line-height: 1;
-    white-space: nowrap;
-  }
-  
-  /* Íconos / imágenes dentro de los botones */
+/* ========== BASE ========== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  padding-right: clamp(10px, 2vw, 30px);
+  overflow-x: hidden;
+  font-family: sans-serif;
+  background-color: #f4f4f9;
+  background-image: url('background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* ========== SIDEBAR ========== */
+.dashboard-container {
+  width: clamp(190px, 18vw, 250px);
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  flex-shrink: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-top-right-radius: clamp(40px, 6.5vw, 90px);
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.panel-izquierdo {
+  width: 100%;
+  padding: clamp(14px, 2vw, 30px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 2vh, 20px);
+}
+
+.contenido-panel {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 4.5vh, 55px);
+  flex-shrink: 0;
+}
+
+/* ========== BOTONES DEL NAVBAR ========== */
+.navbar button {
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 1.4vw, 20px);
+  padding: 2px clamp(8px, 1.1vw, 15px);
+  border: none;
+  border-radius: 30px;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.navbar button img,
+.navbar button svg {
+  width: clamp(40px, 5vw, 70px);
+  height: clamp(36px, 4.5vw, 64px);
+  flex-shrink: 0;
+  object-fit: contain;
+  display: block;
+}
+
+.navbar .texto-boton {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+               'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: #f4f4f9;
+  font-size: clamp(12px, 1.3vw, 18px);
+}
+
+.navbar .weather-button,
+.navbar button:hover {
+  background-color: #30ee17;
+}
+
+/* ========== LOGO ========== */
+.logo {
+  width: clamp(50px, 6vw, 80px);
+  height: auto;
+}
+
+.bloque-logo img {
+  width: clamp(60px, 8.5vw, 120px);
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ========== PANEL PRINCIPAL (WEATHER) ========== */
+/* Queda centrado en el espacio libre a la derecha del sidebar */
+.weather-hover {
+  flex: 0 1 750px;
+  min-width: 0;
+  margin: auto;
+  padding: clamp(18px, 3vw, 40px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(12px, 2.5vh, 24px);
+
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border-radius: clamp(30px, 5.5vw, 80px);
+}
+
+.weather-hover .camp-text,
+.weather-hover .next-text {
+  align-self: flex-start;
+  margin: 0;
+  padding-left: clamp(0px, 4vw, 60px);
+  font-size: clamp(20px, 2.3vw, 30px);
+}
+
+/* ========== CAJA "HOY" ========== */
+.weather-info {
+  width: 100%;
+  max-width: 500px;
+  padding: clamp(14px, 2vw, 26px) clamp(18px, 3vw, 40px);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-style: italic;
+  border-radius: clamp(28px, 5vw, 70px);
+}
+
+.hoy-label {
+  font-size: clamp(15px, 1.6vw, 20px);
+}
+
+.hoy-principal {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+#hoy-icono {
+  font-size: clamp(40px, 5vw, 60px);
+  line-height: 1;
+}
+
+#hoy-temp {
+  font-size: clamp(30px, 3.8vw, 44px);
+  font-weight: 500;
+}
+
+.hoy-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: clamp(13px, 1.4vw, 17px);
+}
+
+/* ========== PRÓXIMOS DÍAS ========== */
+/* El div exterior (.weather-days que envuelve al container) no se dibuja:
+   solo se dibujan las tarjetas de adentro */
+.weather-hover > .weather-days {
+  display: contents;
+}
+
+.weather-days-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: clamp(8px, 1.5vw, 20px);
+}
+
+.weather-days-container .weather-days {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 150px;
+  aspect-ratio: 150 / 175;
+  padding: 8px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-style: italic;
+  text-align: center;
+  border-radius: clamp(20px, 3vw, 40px);
+}
+
+.dia-nombre { font-size: clamp(13px, 1.4vw, 17px); }
+.dia-icono  { font-size: clamp(26px, 3vw, 36px); line-height: 1; }
+.dia-temps  { font-size: clamp(12px, 1.3vw, 16px); }
+
+/* ========== TABLET Y CELULAR ========== */
+@media (max-width: 800px) {
+  /* El menú lateral queda solo con íconos */
+  .dashboard-container { width: 78px; }
+  .panel-izquierdo { padding: 12px 8px; align-items: center; }
+  .navbar .texto-boton { display: none; }
+  .navbar button { padding: 4px; }
   .navbar button img,
-  .navbar button svg {
-    width: calc(var(--u) * 80);
-    height: calc(var(--u) * 70);
-    flex-shrink: 0;
-    object-fit: contain;
-    display: block;
-  }
-  
-  .navbar .texto-boton {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-                 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    color: #f4f4f9;
-    font-size: calc(var(--u) * 18);
-  }
-  
-  .navbar .weather-button,
-  .navbar button:hover {
-    background-color: #30ee17;
-  }
-  
-  /* ========== LOGO ========== */
-  .logo {
-    width: calc(var(--u) * 80);
-    height: auto;
-  }
-  
-  .bloque-logo img {
-    width: calc(var(--u) * 120);
-    max-width: 100%;
-    height: auto;
-    display: block;
-  }
-  
-  /* ========== PANEL PRINCIPAL (WEATHER) ========== */
+  .navbar button svg { width: 44px; height: 40px; }
+  .bloque-logo img { width: 56px; }
+
   .weather-hover {
-    position: absolute;
-    top: 50%;
-    /* centrado en el espacio libre a la derecha del sidebar */
-    left: calc(var(--sidebar-w) + (100% - var(--sidebar-w)) / 2);
-    transform: translate(-50%, -50%);
-  
-    width: calc(var(--u) * 750);
-    height: calc(var(--u) * 580);
-  
-    background-color: rgba(0, 0, 0, 0.6);
-    color: white;
-    border-radius: calc(var(--u) * 80);
-  
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin: 16px auto;
+    border-radius: 36px;
   }
-  
-  .weather-hover .camp-text {
-    position: absolute;
-    top: 5%;
-    left: 10%;
-    font-size: calc(var(--u) * 30);
-  }
-  
-  .weather-hover .next-text {
-    position: absolute;
-    top: 56%;
-    left: 10%;
-    font-size: calc(var(--u) * 30);
-  }
-  
-  /* ========== PANEL DE INFO ========== */
-  .weather-info {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  
-    width: calc(var(--u) * 500);
-    height: calc(var(--u) * 220);
-  
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    border-radius: calc(var(--u) * 100);
-  
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* ========== DÍAS ========== */
-  .weather-days-container {
-    position: absolute;
-    top: 68%;
-    left: 20%;
-  
-    display: flex;
-    flex-direction: row;
-    gap: calc(var(--u) * 20);
-  }
-  
-  .weather-days {
-    width: calc(var(--u) * 150);
-    height: calc(var(--u) * 175);
-    flex-shrink: 0;
-  
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    border-radius: calc(var(--u) * 40);
-  
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  .weather-hover .camp-text,
+  .weather-hover .next-text { padding-left: 0; }
+}
+
+@media (max-width: 480px) {
+  .weather-info { flex-direction: column; text-align: center; }
+  .weather-days-container { gap: 6px; }
+  .weather-days-container .weather-days { aspect-ratio: auto; min-height: 120px; }
+}

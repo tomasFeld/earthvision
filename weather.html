@@ -5,106 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Earth Vision</title>
     <link rel="stylesheet" href="weather.css">
-    <!-- En tu HTML <head> -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet">
-    <script src="weather.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-
-
-
-
-
 
 <div class="dashboard-container">
 
     <div class="panel-izquierdo">
         <div class="header-izquierdo">
             <div class="bloque-logo">
-              
               <img src="logo2.png" alt="">
-            
             </div>
         </div>
 
         <div class="contenido-panel">
-
           <div class="navbar">
             <a href="hectareas.html">
               <button class="home-button">
-                
                 <img src="homelogo.png" alt="home-image" width="60px">
                 <span class="texto-boton">Home</span>
-                
-                </button>
+              </button>
             </a>
             <a href="analytics.html">
               <button class="analytics-button">
                 <img src="analitycslogo.png" alt="analizis-image" width="60px">
                 <span class="texto-boton">Analytics</span>
-                
               </button>
             </a>
             <a href="weather.html">
               <button class="weather-button">
                 <img src="weatherlogo.png" alt="weather-image" width="60px">
                 <span class="texto-boton">Weather</span>
-                
               </button>
             </a>
             <a href="settings.html">
-              <button>
+              <button class="setting-button">
                 <img src="settingslogo.png" alt="settings-image" width="60px">
                 <span class="texto-boton">Setting</span>
-                
               </button>
             </a>
-  
-  
-  
           </div>
-  
-          
         </div>
-
-
-        
-            
-
-            
-        </div>
-     </div>
+    </div>
 </div>
 
 
-
-
-  <div class="weather-hover">
-    <h2 class="camp-text">Campo 1</h2>
+<div class="weather-hover">
+    <h2 class="camp-text">📍 <span id="campo-nombre">Campo 1</span></h2>
 
     <div class="weather-info">
+        <div class="hoy-izq">
+            <span class="hoy-label">Hoy</span>
+            <div class="hoy-principal">
+                <span id="hoy-icono">⏳</span>
+                <span id="hoy-temp">--°C</span>
+            </div>
+        </div>
 
-        <h2>Informacion de clima</h2>
+        <div class="hoy-stats">
+            <span id="hoy-viento">💨 -- KMH</span>
+            <span id="hoy-lluvia">🌧️ -- MM</span>
+            <span id="hoy-humedad">💧 --%</span>
+        </div>
     </div>
 
     <h2 class="next-text">Proximos Dias:</h2>
 
     <div class="weather-days">
-
-
         <div class="weather-days-container">
-            <div class="weather-days">DIA 1</div>
-            <div class="weather-days">DIA 2</div>
-            <div class="weather-days">DIA 3</div>
+            <div class="weather-days" id="dia-1"><span class="dia-nombre">DIA 1</span></div>
+            <div class="weather-days" id="dia-2"><span class="dia-nombre">DIA 2</span></div>
+            <div class="weather-days" id="dia-3"><span class="dia-nombre">DIA 3</span></div>
         </div>
     </div>
+</div>
 
-    
-
-
-  </div>
-    
-    
+<script src="weather.js"></script>
 </body>
 </html>
