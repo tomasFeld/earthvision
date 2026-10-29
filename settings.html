@@ -5,25 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Earth Vision</title>
     <link rel="stylesheet" href="settings.css">
-    <!-- En tu HTML <head> -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-
-
-
-
-
 
 <div class="dashboard-container">
 
     <div class="panel-izquierdo">
         <div class="header-izquierdo">
             <div class="bloque-logo">
-              
               <img src="logo2.png" alt="">
-            
             </div>
         </div>
 
@@ -32,116 +23,81 @@
           <div class="navbar">
             <a href="hectareas.html">
               <button class="home-button">
-                
                 <img src="homelogo.png" alt="home-image" width="60px">
                 <span class="texto-boton">Home</span>
-                
-                </button>
+              </button>
             </a>
             <a href="analytics.html">
               <button class="analytics-button">
                 <img src="analitycslogo.png" alt="analizis-image" width="60px">
                 <span class="texto-boton">Analytics</span>
-                
               </button>
             </a>
             <a href="weather.html">
               <button class="weather-button">
                 <img src="weatherlogo.png" alt="weather-image" width="60px">
                 <span class="texto-boton">Weather</span>
-                
               </button>
             </a>
             <a href="settings.html">
               <button class="setting-button">
                 <img src="settingslogo.png" alt="settings-image" width="60px">
                 <span class="texto-boton">Setting</span>
-                
               </button>
             </a>
-  
-  
-  
           </div>
-  
-          
+
         </div>
 
+        <div class="config-hover">
 
-        
-            <div class="config-hover">
+            <div class="buttons-config">
 
-                <div class="buttons-config">
+                <button class="perfil-button" id="abrir-usuario">
+                    <span class="texto-boton">Usuario</span>
+                    <img src="Img/flecha-correcta-3d-icon-png-download-4206421.png" alt="">
+                </button>
 
-                    <button class="perfil-button" id="abrir-usuario">
-                        
-                        <span class="texto-boton">Usuario</span>
-                        <img src="Img/flecha-correcta-3d-icon-png-download-4206421.png" alt="">
-    
-                    </button>
-    
-                    <button class="config-button" id="abrir-perfil">
-                        
-                        <span class="texto-boton">Perfil</span>
-                        <img src="Img/flecha-correcta-3d-icon-png-download-4206421.png" alt="">
-                    </button>
-    
-                    <button class="config-button" id="abrir-idioma">
-                        <span class="texto-boton">Idioma</span>
-                        <img src="Img/flecha-correcta-3d-icon-png-download-4206421.png" alt="">
-                        
-                    </button>
-    
-                    <button class="config-button" id="abrir-modal">
-                        
-                        <span class="texto-boton">Cerrar sesion</span>
-                        <img src="Img/flecha-correcta-3d-icon-png-download-4206421.png" alt="">
-                    </button>
+                <button class="config-button" id="abrir-perfil">
+                    <span class="texto-boton">Perfil</span>
+                    <img src="Img/flecha-correcta-3d-icon-png-download-4206421.png" alt="">
+                </button>
 
+                <button class="config-button" id="abrir-idioma">
+                    <span class="texto-boton">Idioma</span>
+                    <img src="Img/flecha-correcta-3d-icon-png-download-4206421.png" alt="">
+                </button>
 
-                </div>
+                <button class="config-button" id="abrir-modal">
+                    <span class="texto-boton">Cerrar sesion</span>
+                    <img src="Img/flecha-correcta-3d-icon-png-download-4206421.png" alt="">
+                </button>
 
-
-                
             </div>
 
-            
-       
-     </div>
+        </div>
+
+    </div>
 </div>
 
 
 
-
-  
-    
-<!-- Ventana de confirmación -->
 <div class="modal-overlay" id="modal-cerrar-sesion">
-
   <div class="modal-sesion">
-
       <button class="cerrar-modal" id="cancelar-x" aria-label="Cerrar">×</button>
 
       <h2>Cerrar Sesión</h2>
-
       <p>¿Estás seguro de que querés cerrar sesión?</p>
 
       <div class="botones-modal">
-          <button class="boton-cancelar" id="cancelar-sesion">
-              Cancelar
-          </button>
-
-          <button class="boton-confirmar" id="confirmar-sesion">
-              Cerrar Sesión
-          </button>
+          <button class="boton-cancelar" id="cancelar-sesion">Cancelar</button>
+          <button class="boton-confirmar" id="confirmar-sesion">Cerrar Sesión</button>
       </div>
-
   </div>
-
 </div>
 
 
-<!-- CUADRO USUARIO -->
+
 <div class="modal-overlay" id="modal-usuario">
   <div class="modal-sesion">
       <button class="cerrar-modal" data-cerrar="modal-usuario">×</button>
@@ -150,18 +106,21 @@
       <p>Información de tu cuenta</p>
 
       <div class="datos-cuenta">
-          <p><strong>Nombre:</strong> Usuario</p>
-          <p><strong>Correo:</strong> usuario@gmail.com</p>
+          <p><strong>Email:</strong> <span id="dato-email">...</span></p>
+          <p>
+              <strong>Contraseña:</strong>
+              <span id="dato-password">...</span>
+              <button type="button" id="ver-password" class="boton-cancelar" style="display:none;">Mostrar</button>
+          </p>
+          <p><strong>Hectáreas:</strong> <span id="dato-cantidad">0</span></p>
+          <div id="dato-lista"></div>
       </div>
 
-      <button class="boton-cancelar" data-cerrar="modal-usuario">
-          Cerrar
-      </button>
+      <button class="boton-cancelar" data-cerrar="modal-usuario">Cerrar</button>
   </div>
 </div>
 
 
-<!-- CUADRO PERFIL -->
 <div class="modal-overlay" id="modal-perfil">
   <div class="modal-sesion">
       <button class="cerrar-modal" data-cerrar="modal-perfil">×</button>
@@ -173,16 +132,14 @@
       <input type="text" id="nombre-perfil" placeholder="Tu nombre">
 
       <label for="correo-perfil">Correo electrónico</label>
-      <input type="email" id="correo-perfil" placeholder="Tu correo">
+      <input type="email" id="correo-perfil" readonly>
 
-      <button class="boton-confirmar" data-cerrar="modal-perfil">
-          Guardar
-      </button>
+      <button class="boton-confirmar" id="guardar-perfil">Guardar</button>
   </div>
 </div>
 
 
-<!-- CUADRO IDIOMA -->
+
 <div class="modal-overlay" id="modal-idioma">
   <div class="modal-sesion">
       <button class="cerrar-modal" data-cerrar="modal-idioma">×</button>
@@ -196,92 +153,135 @@
           <option value="pt">Português</option>
       </select>
 
-      <button class="boton-confirmar" data-cerrar="modal-idioma">
-          Aceptar
-      </button>
+      <button class="boton-confirmar" id="guardar-idioma">Aceptar</button>
   </div>
 </div>
 
 
 <script>
-  const botonAbrir = document.getElementById("abrir-modal");
-  const modal = document.getElementById("modal-cerrar-sesion");
-  const botonCancelar = document.getElementById("cancelar-sesion");
-  const botonCerrarX = document.getElementById("cancelar-x");
-  const botonConfirmar = document.getElementById("confirmar-sesion");
 
-  // Abrir la ventana
-  botonAbrir.addEventListener("click", () => {
-      modal.classList.add("activo");
-  });
 
-  // Cerrar la ventana
-  botonCancelar.addEventListener("click", () => {
-      modal.classList.remove("activo");
-  });
 
-  botonCerrarX.addEventListener("click", () => {
-      modal.classList.remove("activo");
-  });
 
-  // Cerrar al hacer clic fuera de la ventana
-  modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-          modal.classList.remove("activo");
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (!user) {
+      window.location.href = PAGINA_LOGIN;
+  }
+
+
+  let fields = [];
+  if (user) {
+      if (Array.isArray(user.fields)) {
+          fields = user.fields;
+      } else if (user.fieldCoordenatesLat !== undefined) {
+          fields = [{ lat: user.fieldCoordenatesLat, lng: user.fieldCoordenatesLng }];
       }
-  });
+  }
 
-  // Confirmar el cierre de sesión
-  botonConfirmar.addEventListener("click", () => {
+
+  if (user) {
+      document.getElementById("dato-email").textContent = user.email;
+      document.getElementById("dato-cantidad").textContent = fields.length;
+
+      const lista = document.getElementById("dato-lista");
+      fields.forEach((f, i) => {
+          const linea = document.createElement("p");
+          linea.textContent =
+              `Hectarea ${i + 1}: ${Number(f.lat).toFixed(5)}, ${Number(f.lng).toFixed(5)}`;
+          lista.appendChild(linea);
+      });
+
+      const spanPassword = document.getElementById("dato-password");
+      const botonVer = document.getElementById("ver-password");
+      let visible = false;
+
+      function pintarPassword() {
+          spanPassword.textContent = visible ? user.password : "•".repeat(user.password.length);
+          botonVer.textContent = visible ? "Ocultar" : "Mostrar";
+      }
+
+      if (user.password) {
+          botonVer.style.display = "inline-block";
+          botonVer.addEventListener("click", () => {
+              visible = !visible;
+              pintarPassword();
+          });
+          pintarPassword();
+      } else {
+          spanPassword.textContent = "No disponible";
+      }
+
+    
+      document.getElementById("correo-perfil").value = user.email;
+      document.getElementById("nombre-perfil").value =
+          localStorage.getItem(`profileName:${user.email}`) || "";
+
+      document.getElementById("guardar-perfil").addEventListener("click", () => {
+          const nombre = document.getElementById("nombre-perfil").value.trim();
+          localStorage.setItem(`profileName:${user.email}`, nombre);
+          document.getElementById("modal-perfil").classList.remove("activo");
+      });
+
+
+      const selectIdioma = document.getElementById("seleccionar-idioma");
+      selectIdioma.value = localStorage.getItem("idioma") || "es";
+
+      document.getElementById("guardar-idioma").addEventListener("click", () => {
+          localStorage.setItem("idioma", selectIdioma.value);
+          document.getElementById("modal-idioma").classList.remove("activo");
+      });
+  }
+
+
+  const modalSesion = document.getElementById("modal-cerrar-sesion");
+
+  document.getElementById("abrir-modal").addEventListener("click", () => {
+      modalSesion.classList.add("activo");
+  });
+  document.getElementById("cancelar-sesion").addEventListener("click", () => {
+      modalSesion.classList.remove("activo");
+  });
+  document.getElementById("cancelar-x").addEventListener("click", () => {
+      modalSesion.classList.remove("activo");
+  });
+  document.getElementById("confirmar-sesion").addEventListener("click", () => {
+      localStorage.removeItem("user");
       window.location.href = "login.html";
   });
 
-  // Cerrar con Escape
-  document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-          modal.classList.remove("activo");
-      }
+  
+  document.getElementById("abrir-usuario").addEventListener("click", () => {
+      document.getElementById("modal-usuario").classList.add("activo");
+  });
+  document.getElementById("abrir-perfil").addEventListener("click", () => {
+      document.getElementById("modal-perfil").classList.add("activo");
+  });
+  document.getElementById("abrir-idioma").addEventListener("click", () => {
+      document.getElementById("modal-idioma").classList.add("activo");
   });
 
-  
-/* ABRIR LOS CUADROS */
-document.getElementById("abrir-usuario").addEventListener("click", () => {
-    document.getElementById("modal-usuario").classList.add("activo");
-});
 
-document.getElementById("abrir-perfil").addEventListener("click", () => {
-    document.getElementById("modal-perfil").classList.add("activo");
-});
-
-document.getElementById("abrir-idioma").addEventListener("click", () => {
-    document.getElementById("modal-idioma").classList.add("activo");
-});
+  document.querySelectorAll("[data-cerrar]").forEach((boton) => {
+      boton.addEventListener("click", () => {
+          document.getElementById(boton.getAttribute("data-cerrar")).classList.remove("activo");
+      });
+  });
 
 
-/* CERRAR CON LA X O CON LOS BOTONES */
-document.querySelectorAll("[data-cerrar]").forEach(boton => {
-    boton.addEventListener("click", () => {
-        const id = boton.getAttribute("data-cerrar");
-        document.getElementById(id).classList.remove("activo");
-    });
-});
+  document.querySelectorAll(".modal-overlay").forEach((modal) => {
+      modal.addEventListener("click", (e) => {
+          if (e.target === modal) modal.classList.remove("activo");
+      });
+  });
 
 
-/* CERRAR AL HACER CLIC AFUERA */
-document.querySelectorAll(".modal-overlay").forEach(modal => {
-    modal.addEventListener("click", (e) => {
-        if (e.target === modal) {
-            modal.classList.remove("activo");
-        }
-    });
-});
-
+  document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+          document.querySelectorAll(".modal-overlay").forEach((m) => m.classList.remove("activo"));
+      }
+  });
 </script>
 
-
-
-  
-    
-    
 </body>
 </html>

@@ -1,5 +1,4 @@
-/* ========== UNIDAD ESCALABLE ========== */
-/* Diseño base: 1366 x 768. Todo se mide en múltiplos de --u */
+
 :root {
     --u: min(100vw / 1366, 100vh / 768);
     --sidebar-w: calc(var(--u) * 250);
@@ -11,7 +10,7 @@
     box-sizing: border-box;
   }
   
-  /* ========== BASE ========== */
+
   body {
     margin: 0;
     height: 100vh;
@@ -27,7 +26,7 @@
     background-attachment: fixed;
   }
   
-  /* ========== SIDEBAR ========== */
+
   .dashboard-container {
     display: flex;
     width: var(--sidebar-w);
@@ -59,7 +58,7 @@
     flex-shrink: 0;
   }
   
-  /* ========== BOTONES DEL NAVBAR ========== */
+  
   .navbar button {
     display: flex;
     align-items: center;
@@ -74,7 +73,7 @@
     white-space: nowrap;
   }
   
-  /* Íconos / imágenes dentro de los botones */
+
   .navbar button img,
   .navbar button svg {
     width: calc(var(--u) * 80);
@@ -96,7 +95,7 @@
     background-color: #30ee17;
   }
   
-  /* ========== LOGO ========== */
+  
   .logo {
     width: calc(var(--u) * 80);
     height: auto;
@@ -115,7 +114,7 @@
 
     position: absolute;
     top: 50%;
-    /* centrado en el espacio libre a la derecha del sidebar */
+  
     left: calc(var(--sidebar-w) + (100% - var(--sidebar-w)) / 2);
     transform: translate(-50%, -50%);
   
@@ -176,7 +175,7 @@
 }
 
 
-/* ===== MODAL CERRAR SESIÓN ===== */
+
 
 .modal-overlay {
   position: fixed;
