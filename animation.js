@@ -10,17 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
     triggerButton.addEventListener('click', () => {
         pageWrapper.classList.add('expanded');
 
-        if (hectareaButton) {
-            hectareaButton.textContent = 'Sing-up';
-        }
+       
     });
 
     // Colapsar: Login -> vuelve a la pantalla inicial centrada
     loginTab.addEventListener('click', () => {
         pageWrapper.classList.remove('expanded');
 
-        if (hectareaButton) {
-            hectareaButton.textContent = 'Login';
-        }
+       
     });
 });
