@@ -6,14 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!pageWrapper || !triggerButton || !loginTab) return;
 
-    // Expandir: Sing-up -> vista completa (tarjeta a pantalla completa a la derecha)
+   
     triggerButton.addEventListener('click', () => {
         pageWrapper.classList.add('expanded');
 
        
     });
 
-    // Colapsar: Login -> vuelve a la pantalla inicial centrada
+   
     loginTab.addEventListener('click', () => {
         pageWrapper.classList.remove('expanded');
 
