@@ -1,3 +1,8 @@
+:root {
+    --u: min(100vw / 1366, 100vh / 768);
+    --sidebar-w: calc(var(--u) * 250);
+}
+
 *,
 *::before,
 *::after {
@@ -23,32 +28,32 @@ body {
 /* ========== SIDEBAR (BARRA LATERAL) ========== */
 .dashboard-container {
   display: flex;
-  width: 250px;
+  width: var(--sidebar-w);
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.6);
-  border-top-right-radius: 60px;
+  border-top-right-radius: calc(var(--u) * 60);
   flex-shrink: 0;
 }
 
 .panel-izquierdo {
   width: 100%;
-  padding: 30px;
+  padding: calc(var(--u) * 30);
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: calc(var(--u) * 20);
 }
 
 .contenido-panel {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  gap: 30px;
+  gap: calc(var(--u) * 30);
 }
 
 .navbar {
   display: flex;
   flex-direction: column;
-  gap: 35px;
+  gap: calc(var(--u) * 35);
   flex-shrink: 0;
 }
 
@@ -60,10 +65,10 @@ body {
 .navbar button {
   display: flex;
   align-items: center;
-  gap: 15px;
-  padding: 5px 15px;
+  gap: calc(var(--u) * 15);
+  padding: calc(var(--u) * 5) calc(var(--u) * 15);
   border: none;
-  border-radius: 30px;
+  border-radius: calc(var(--u) * 30);
   background-color: transparent;
   transition: background-color 0.2s ease;
   cursor: pointer;
@@ -74,8 +79,8 @@ body {
 
 .navbar button img,
 .navbar button svg {
-  width: 40px;
-  height: 40px;
+  width: calc(var(--u) * 40);
+  height: calc(var(--u) * 40);
   flex-shrink: 0;
   object-fit: contain;
   display: block;
@@ -83,7 +88,7 @@ body {
 
 .navbar .texto-boton {
   color: #f4f4f9;
-  font-size: 18px;
+  font-size: calc(var(--u) * 18);
 }
 
 .navbar .home-button,
@@ -93,7 +98,7 @@ body {
 
 /* ========== LOGO IZQUIERDO ========== */
 .bloque-logo img {
-  width: 100px;
+  width: calc(var(--u) * 100);
   max-width: 100%;
   height: auto;
   display: block;
@@ -103,22 +108,22 @@ body {
 .hectareas-hover {
   position: absolute;
   top: 50%;
-  left: calc(50% + 125px); /* Centrado automático compensando el menú de 250px */
+  left: calc(var(--sidebar-w) + (100% - var(--sidebar-w)) / 2);
   transform: translate(-50%, -50%);
 
-  width: 600px;
+  width: calc(var(--u) * 600);
   max-width: 90vw;
-  padding: 30px 20px;
+  padding: calc(var(--u) * 30) calc(var(--u) * 20);
 
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
-  border-radius: 50px;
+  border-radius: calc(var(--u) * 50);
 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 20px;
+  gap: calc(var(--u) * 20);
 }
 
 /* ========== LOGO SUPERIOR CENTRAL ========== */
@@ -128,9 +133,9 @@ body {
   align-items: center;
   background-color: #ffffff;
   border-radius: 50%;
-  padding: 10px;
-  width: 90px;
-  height: 90px;
+  padding: calc(var(--u) * 10);
+  width: calc(var(--u) * 90);
+  height: calc(var(--u) * 90);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -147,72 +152,61 @@ body {
   background-color: rgb(13, 110, 23);
   color: #fff;
   text-align: center;
-  padding: 10px 0;
-  border-radius: 15px;
-  font-size: 24px;
+  padding: calc(var(--u) * 10) 0;
+  border-radius: calc(var(--u) * 15);
+  font-size: calc(var(--u) * 24);
   font-style: italic;
   font-weight: 500;
 }
 
 /* ========== CAJA DE BOTONES INTERNA ========== */
 .hct_btn_hover {
-  width: 450px;
+  width: calc(var(--u) * 450);
   max-width: 90%;
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
-  border-radius: 40px;
+  border-radius: calc(var(--u) * 40);
 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding: 30px 20px;
-  gap: 15px;
+  padding: calc(var(--u) * 30) calc(var(--u) * 20);
+  gap: calc(var(--u) * 15);
 }
 
 /* ========== BOTONES INDIVIDUALES DE HECTÁREAS ========== */
 .hct_btn {
   background-color: #6d696a;
   color: #fff;
-  border-radius: 50px;
+  border-radius: calc(var(--u) * 50);
   border: none;
   width: 100%;
-  max-width: 350px;
-  height: 45px;
-  font-size: 16px;
+  max-width: calc(var(--u) * 350);
+  height: calc(var(--u) * 45);
+  font-size: calc(var(--u) * 16);
   display: inline-flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-
-  
-  
 }
 
-
-.hct_btn:hover{
-
+.hct_btn:hover {
   background-color: #a09c9d;
-
 }
-
-  
-
 
 .agr_hct_button {
   background-color: rgb(13, 110, 23);
   color: #fff;
   white-space: nowrap;
-  border-radius: 50px;
+  border-radius: calc(var(--u) * 50);
   border: none;
-  font-size: 16px;
+  font-size: calc(var(--u) * 16);
   width: 100%;
-  max-width: 350px;
-  height: 45px;
+  max-width: calc(var(--u) * 350);
+  height: calc(var(--u) * 45);
   display: inline-flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
 }
-
-
