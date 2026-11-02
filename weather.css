@@ -1,211 +1,208 @@
 :root {
-    --u: min(100vw / 1366, 100vh / 768);
-    --sidebar-w: calc(var(--u) * 250);
+  --u: min(100vw / 1366, 100vh / 768);
+  --sidebar-w: calc(var(--u) * 250);
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    height: 100vh;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    font-family: 'Poppins', sans-serif;
-    background-color: #f4f4f9;
-    background-image: url('background.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+  margin: 0;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f4f4f9;
+  background-image: url('background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
-/* ========== SIDEBAR ========== */
+/* ===== BARRA LATERAL (igual en todas las páginas) ===== */
 .dashboard-container {
-    display: flex;
-    width: var(--sidebar-w);
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.6);
-    border-top-right-radius: calc(var(--u) * 60);
-    flex-shrink: 0;
+  display: flex;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-top-right-radius: calc(var(--u) * 90);
+  flex-shrink: 0;
 }
 
 .panel-izquierdo {
-    width: 100%;
-    padding: calc(var(--u) * 30);
-    display: flex;
-    flex-direction: column;
-    gap: calc(var(--u) * 20);
+  width: 100%;
+  padding: calc(var(--u) * 30);
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 20);
 }
 
 .contenido-panel {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: calc(var(--u) * 30);
+  display: flex;
+  align-items: flex-start;
 }
 
 .navbar {
-    display: flex;
-    flex-direction: column;
-    gap: calc(var(--u) * 35);
-    flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 55);
+  flex-shrink: 0;
 }
 
 .navbar a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .navbar button {
-    display: flex;
-    align-items: center;
-    gap: calc(var(--u) * 15);
-    padding: calc(var(--u) * 5) calc(var(--u) * 15);
-    border: none;
-    border-radius: calc(var(--u) * 30);
-    background-color: transparent;
-    transition: background-color 0.2s ease;
-    cursor: pointer;
-    line-height: 1;
-    white-space: nowrap;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 20);
+  padding: calc(var(--u) * 2) calc(var(--u) * 15);
+  border: none;
+  border-radius: calc(var(--u) * 30);
+  background-color: transparent;
+  cursor: pointer;
+  line-height: 1;
+  white-space: nowrap;
 }
 
-.navbar button img,
-.navbar button svg {
-    width: calc(var(--u) * 40);
-    height: calc(var(--u) * 40);
-    flex-shrink: 0;
-    object-fit: contain;
-    display: block;
+.navbar button img {
+  width: calc(var(--u) * 80);
+  height: calc(var(--u) * 70);
+  flex-shrink: 0;
+  object-fit: contain;
+  display: block;
 }
 
 .navbar .texto-boton {
-    color: #f4f4f9;
-    font-size: calc(var(--u) * 18);
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+               'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: #f4f4f9;
+  font-size: calc(var(--u) * 18);
 }
 
 .navbar .weather-button,
 .navbar button:hover {
-    background-color: #30ee17;
+  background-color: #30ee17;
 }
 
 .bloque-logo img {
-    width: calc(var(--u) * 100);
-    max-width: 100%;
-    height: auto;
-    display: block;
+  width: calc(var(--u) * 120);
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
-/* ========== PANEL DE CLIMA CENTRAL ========== */
+/* ===== PANEL DEL CLIMA ===== */
 .weather-hover {
-    position: absolute;
-    top: 50%;
-    left: calc(var(--sidebar-w) + (100% - var(--sidebar-w)) / 2);
-    transform: translate(-50%, -50%);
-
-    width: calc(var(--u) * 650);
-    max-width: 90vw;
-    padding: calc(var(--u) * 35) calc(var(--u) * 30);
-
-    background-color: rgba(0, 0, 0, 0.65);
-    color: white;
-    border-radius: calc(var(--u) * 50);
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: calc(var(--u) * 20);
+  position: absolute;
+  top: 50%;
+  left: calc(var(--sidebar-w) + (100% - var(--sidebar-w)) / 2);
+  transform: translate(-50%, -50%);
+  width: calc(var(--u) * 650);
+  padding: calc(var(--u) * 35) calc(var(--u) * 30);
+  background-color: rgba(0, 0, 0, 0.65);
+  color: white;
+  border-radius: calc(var(--u) * 50);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--u) * 20);
 }
 
 .camp-text {
-    margin: 0;
-    font-size: calc(var(--u) * 22);
-    font-style: italic;
-    font-weight: 600;
+  margin: 0;
+  font-size: calc(var(--u) * 22);
+  font-style: italic;
+  font-weight: 600;
 }
 
 .weather-info {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: calc(var(--u) * 20);
-    border-radius: calc(var(--u) * 30);
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: calc(var(--u) * 20);
+  border-radius: calc(var(--u) * 30);
 }
 
 .hoy-izq {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: calc(var(--u) * 8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--u) * 8);
 }
 
 .hoy-label {
-    font-size: calc(var(--u) * 16);
-    font-style: italic;
-    color: #ccc;
+  font-size: calc(var(--u) * 16);
+  font-style: italic;
+  color: #ccc;
 }
 
 .hoy-principal {
-    display: flex;
-    align-items: center;
-    gap: calc(var(--u) * 12);
-    font-size: calc(var(--u) * 32);
-    font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 12);
+  font-size: calc(var(--u) * 32);
+  font-weight: 600;
+}
+
+#hoy-icono {
+  font-size: calc(var(--u) * 45);
 }
 
 .hoy-stats {
-    display: flex;
-    flex-direction: column;
-    gap: calc(var(--u) * 8);
-    font-size: calc(var(--u) * 15);
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 8);
+  font-size: calc(var(--u) * 15);
 }
 
 .next-text {
-    margin: calc(var(--u) * 10) 0 0 0;
-    font-size: calc(var(--u) * 18);
-    font-style: italic;
+  margin: calc(var(--u) * 10) 0 0 0;
+  font-size: calc(var(--u) * 18);
+  font-style: italic;
 }
 
-.weather-days {
-    width: 100%;
+.weather-hover > .weather-days {
+  width: 100%;
 }
 
 .weather-days-container {
-    display: flex;
-    justify-content: space-between;
-    gap: calc(var(--u) * 15);
-    width: 100%;
+  display: flex;
+  gap: calc(var(--u) * 15);
+  width: 100%;
 }
 
 .weather-days-container > div {
-    flex: 1;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: calc(var(--u) * 15);
-    border-radius: calc(var(--u) * 20);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: calc(var(--u) * 8);
-    font-size: calc(var(--u) * 14);
+  flex: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: calc(var(--u) * 15);
+  border-radius: calc(var(--u) * 20);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--u) * 8);
+  font-size: calc(var(--u) * 14);
 }
 
 .dia-nombre {
-    font-style: italic;
-    font-weight: 600;
+  font-style: italic;
+  font-weight: 600;
+  text-transform: capitalize;
 }
 
 .dia-icono {
-    font-size: calc(var(--u) * 24);
+  font-size: calc(var(--u) * 28);
 }
 
 .dia-temps {
-    font-size: calc(var(--u) * 13);
-    color: #ddd;
+  font-size: calc(var(--u) * 14);
+  color: #ddd;
 }

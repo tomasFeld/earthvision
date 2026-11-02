@@ -1,5 +1,4 @@
-/* ========== UNIDAD ESCALABLE ========== */
-/* Diseño base: 1366 x 768. Todo se mide en múltiplos de --u */
+
 :root {
     --u: min(100vw / 1366, 100vh / 768);
     --sidebar-w: calc(var(--u) * 250);
@@ -11,7 +10,7 @@
     box-sizing: border-box;
   }
   
-  /* ========== BASE ========== */
+
   body {
     margin: 0;
     height: 100vh;
@@ -158,6 +157,11 @@
     justify-content: center;
     align-items: center;
   }
+
+  .ingredients-buttons button:hover{
+
+    background-color: rgb(51, 50, 50);
+  }
   
   /* ========== PANELES INTERNOS ========== */
   .value-hover {
@@ -189,3 +193,34 @@
     justify-content: center;
     align-items: center;
   }
+
+  .value-hover,
+.increase-hover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mercado-dinero,
+.mercado-incremento {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: #fff;
+    text-align: center;
+}
+
+.mercado-etiqueta { font-size: clamp(14px, 1.5vw, 20px); font-style: italic; }
+.mercado-precio   { font-size: clamp(26px, 3.4vw, 46px); font-weight: 600; }
+.mercado-sub      { font-size: clamp(13px, 1.3vw, 17px); opacity: 0.9; }
+.mercado-fecha    { font-size: 12px; opacity: 0.7; }
+.mercado-fuente   { font-size: 11px; color: #ddd; margin-top: 6px; }
+
+.sube { color: #4cff6a; }
+.baja { color: #ff6b6b; }
+
+.ingredients-buttons button.active {
+    background-color: #0f6b1a;
+}

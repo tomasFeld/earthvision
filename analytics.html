@@ -8,6 +8,8 @@
     <!-- En tu HTML <head> -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="analytics.js"></script>
+    
 </head>
 <body>
 
@@ -83,42 +85,45 @@
 
     <div class="ingredients-buttons">
 
-
-
-        <button class="Soja">
+        <button class="Soja active" id="btn-soja">
             <span>Soja</span>
-
         </button>
 
-        <button class="Maiz">
+        <button class="Maiz" id="btn-maiz">
             <span>Maiz</span>
-            
-            
         </button>
 
-        <button class="Trigo">
+        <button class="Trigo" id="btn-trigo">
             <span>Trigo</span>
-            
         </button>
 
-        <button class="Girasol">
+        <button class="Girasol" id="btn-girasol">
             <span>Girasol</span>
-            
         </button>
     </div>
 
     <div class="value-hover">
-
-      dINERO
+        <div class="mercado-dinero">
+            <span class="mercado-etiqueta" id="mercado-titulo">Soja</span>
+            <span class="mercado-precio" id="precio-ars">Cargando...</span>
+            <span class="mercado-sub" id="precio-usd"></span>
+            <span class="mercado-fecha" id="mercado-fecha"></span>
+        </div>
     </div>
 
     <div class="increase-hover">
-
-      Incremento
+        <div class="mercado-incremento">
+            <span class="mercado-etiqueta">Variación</span>
+            <span class="mercado-precio" id="inc-valor">--</span>
+            <span class="mercado-sub">vs. la rueda anterior</span>
+            <span class="mercado-sub" id="inc-30d"></span>
+            <span class="mercado-fuente">Fuente: granos.ar</span>
+        </div>
     </div>
 
+</div>
 
-  </div>
+
     
     
 </body>
