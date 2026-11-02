@@ -81,15 +81,18 @@ body {
 
 .navbar .texto-boton {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-               'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  color: #f4f4f9;
-  font-size: calc(var(--u) * 18);
+                 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #f4f4f9;
+    font-size: calc(var(--u) * 18);
+    
 }
 
 .navbar .setting-button,
 .navbar button:hover {
   background-color: #30ee17;
+  
 }
+
 
 .bloque-logo img {
   width: calc(var(--u) * 120);

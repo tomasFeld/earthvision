@@ -88,12 +88,20 @@
                  'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     color: #f4f4f9;
     font-size: calc(var(--u) * 18);
+    text-decoration: none;
   }
   
   .navbar .analytics-button,
   .navbar button:hover {
     background-color: #30ee17;
   }
+
+  .navbar a,
+.navbar a:visited,
+.navbar a:hover {
+  text-decoration: none;
+}
+
   
   /* ========== LOGO ========== */
   .logo {
