@@ -1,151 +1,150 @@
-const API = "http://localhost:3000";
 const CLASE_BOTON = "hct_btn";
-const MAX_HECTAREAS = 4;
-const DISTANCIA_MINIMA_M = 100;
-const ESRI = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
+const MAX_HECTAREAS = 4;            // cambialo si querés permitir más
 
 let user = null;
 let mapa = null;
-let marcador = null;
+let marcadores = [];
+let marcadorNuevo = null;
 let puntoElegido = null;
 
-const $ = (id) => document.getElementById(id);
-const mensajeMapa = (texto) => { $("mapa-mensaje").textContent = texto; };
-
+// ---------- Datos ----------
 function cargarUsuario() {
   const u = JSON.parse(localStorage.getItem("user"));
-  return u && Array.isArray(u.fields) ? u : null;
-}
+  if (!u) return null;
 
-function distanciaMetros(a, b) {
-  const rad = (g) => (g * Math.PI) / 180;
-  const dLat = rad(b.lat - a.lat);
-  const dLng = rad(b.lng - a.lng);
-  const h = Math.sin(dLat / 2) ** 2 +
-    Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(dLng / 2) ** 2;
-  return 2 * 6371000 * Math.asin(Math.sqrt(h));
-}
-
-async function guardarEnServidor(punto) {
-  let res;
-  try {
-    res = await fetch(`${API}/api/agregarHectareas`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: user.email,
-        fieldCoordenatesLng: punto.lng,
-        fieldCoordenatesLat: punto.lat,
-      }),
-    });
-  } catch {
-    throw new Error("No se pudo conectar con el servidor");
+  // Sesión vieja con una sola coordenada
+  if (!Array.isArray(u.fields) && u.fieldCoordenatesLat !== undefined) {
+    u.fields = [{ lat: u.fieldCoordenatesLat, lng: u.fieldCoordenatesLng }];
   }
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data.mensaje || `Error ${res.status}`);
+  if (!Array.isArray(u.fields)) u.fields = [];
+  return u;
 }
 
-function renderLista() {
-  const lista = $("lista-hectareas");
-  const btnAgregar = $("btn-agregar");
+function guardarUsuario() {
+  localStorage.setItem("user", JSON.stringify(user));
+  // La primera hectárea vive en el server; las demás, solo en este navegador.
+  // El login vuelve a leerlas de esta clave.
+  localStorage.setItem(`extraFields:${user.email}`, JSON.stringify(user.fields.slice(1)));
+}
 
-  lista.querySelectorAll(`.${CLASE_BOTON}`).forEach((el) => el.remove());
+// ---------- Lista de botones ----------
+function renderLista() {
+  const lista = document.getElementById("lista-hectareas");
+  lista.innerHTML = "";
+
+  if (user.fields.length === 0) {
+    lista.textContent = "Todavía no tenés hectáreas registradas.";
+    return;
+  }
 
   user.fields.forEach((f, i) => {
     const boton = document.createElement("button");
     boton.className = CLASE_BOTON;
     boton.textContent = `Hectarea ${i + 1}`;
     boton.addEventListener("click", () => {
-      localStorage.setItem("hectareaActiva", i);
       window.location.href = `coordenadas.html?id=${i}`;
     });
-    lista.insertBefore(boton, btnAgregar);
+    lista.appendChild(boton);
   });
-
-  const lleno = user.fields.length >= MAX_HECTAREAS;
-  btnAgregar.disabled = lleno;
-  btnAgregar.textContent = lleno ? "Máximo 4 hectáreas" : "Agregar hectareas";
 }
 
-function elegirPunto(e) {
-  const { lat, lng } = e.latlng;
-  const cerca = user.fields.findIndex((f) => distanciaMetros(f, { lat, lng }) < DISTANCIA_MINIMA_M);
+// ---------- Mapa para elegir una hectárea ----------
+function dibujarExistentes() {
+  marcadores.forEach((m) => mapa.removeLayer(m));
+  marcadores = user.fields.map((f, i) =>
+    L.circleMarker([f.lat, f.lng], { radius: 8, color: "#fff", fillColor: "#0f6b1a", fillOpacity: 1 })
+      .addTo(mapa)
+      .bindTooltip(`Hectarea ${i + 1}`, { permanent: true, direction: "top" })
+  );
+}
 
-  if (cerca !== -1) {
-    puntoElegido = null;
-    $("btn-confirmar-mapa").disabled = true;
-    mensajeMapa(`Muy cerca de la Hectarea ${cerca + 1}. Elegí otra ubicación.`);
+function iniciarMapa() {
+  const centro = user.fields.length
+    ? [user.fields[user.fields.length - 1].lat, user.fields[user.fields.length - 1].lng]
+    : [-34.6037, -58.3816];
+
+  mapa = L.map("mapa-nuevo").setView(centro, 14);
+
+  L.tileLayer(
+    "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    { attribution: "Tiles © Esri", maxZoom: 19 }
+  ).addTo(mapa);
+  L.tileLayer(
+    "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
+    { maxZoom: 19 }
+  ).addTo(mapa);
+
+  L.Control.geocoder({
+    defaultMarkGeocode: false,
+    placeholder: "Buscar calle o dirección...",
+    geocoder: L.Control.Geocoder.nominatim({ geocodingQueryParams: { countrycodes: "ar" } }),
+  })
+    .on("markgeocode", (e) => mapa.fitBounds(e.geocode.bbox))
+    .addTo(mapa);
+
+  mapa.on("click", (e) => {
+    puntoElegido = { lat: e.latlng.lat, lng: e.latlng.lng };
+    if (marcadorNuevo) marcadorNuevo.setLatLng(e.latlng);
+    else marcadorNuevo = L.marker(e.latlng).addTo(mapa);
+
+    document.getElementById("btn-confirmar-mapa").disabled = false;
+    document.getElementById("modal-mapa-texto").textContent =
+      `Punto elegido: ${puntoElegido.lat.toFixed(5)}, ${puntoElegido.lng.toFixed(5)}`;
+  });
+}
+
+function abrirModal() {
+  if (user.fields.length >= MAX_HECTAREAS) {
+    alert(`Llegaste al máximo de ${MAX_HECTAREAS} hectáreas.`);
     return;
   }
 
-  puntoElegido = { lat, lng };
-  if (marcador) marcador.setLatLng(e.latlng);
-  else marcador = L.marker(e.latlng).addTo(mapa);
-  $("btn-confirmar-mapa").disabled = false;
-  mensajeMapa(`${lat.toFixed(5)}, ${lng.toFixed(5)}`);
-}
-
-function abrirMapa() {
-  $("map-modal").classList.add("active");
   puntoElegido = null;
-  $("btn-confirmar-mapa").disabled = true;
-  mensajeMapa("");
+  document.getElementById("btn-confirmar-mapa").disabled = true;
+  document.getElementById("modal-mapa-texto").textContent =
+    "Hacé clic en el mapa para elegir tu nueva hectárea";
+  document.getElementById("modal-mapa").classList.add("active");
 
-  if (!mapa) {
-    const base = user.fields[user.fields.length - 1] || { lat: -34.6037, lng: -58.3816 };
-    setTimeout(() => {
-      mapa = L.map("map-container").setView([base.lat, base.lng], 15);
-      L.tileLayer(ESRI, { attribution: "Tiles © Esri", maxZoom: 19 }).addTo(mapa);
+  // Leaflet necesita que el contenedor sea visible para medir su tamaño
+  setTimeout(() => {
+    if (!mapa) iniciarMapa();
+    else mapa.invalidateSize();
 
-      L.Control.geocoder({
-        defaultMarkGeocode: false,
-        placeholder: "Buscar calle o dirección...",
-        geocoder: L.Control.Geocoder.nominatim({ geocodingQueryParams: { countrycodes: "ar" } }),
-      })
-        .on("markgeocode", (e) => mapa.fitBounds(e.geocode.bbox))
-        .addTo(mapa);
-
-      mapa.on("click", elegirPunto);
-    }, 100);
-  } else {
-    if (marcador) { mapa.removeLayer(marcador); marcador = null; }
-    setTimeout(() => mapa.invalidateSize(), 100);
-  }
+    if (marcadorNuevo) {
+      mapa.removeLayer(marcadorNuevo);
+      marcadorNuevo = null;
+    }
+    dibujarExistentes();
+  }, 100);
 }
 
-function cerrarMapa() {
-  $("map-modal").classList.remove("active");
+function cerrarModal() {
+  document.getElementById("modal-mapa").classList.remove("active");
 }
 
-async function confirmarHectarea() {
+function confirmarHectarea() {
   if (!puntoElegido) return;
-  const boton = $("btn-confirmar-mapa");
-  boton.disabled = true;
 
-  try {
-    await guardarEnServidor(puntoElegido);
-    user.fields.push(puntoElegido);
-    localStorage.setItem("user", JSON.stringify(user));
-    renderLista();
-    cerrarMapa();
-  } catch (error) {
-    mensajeMapa(error.message);
-    boton.disabled = false;
-  }
+  user.fields.push(puntoElegido);
+  guardarUsuario();
+  renderLista();
+  cerrarModal();
 }
 
+// ---------- Inicio ----------
 document.addEventListener("DOMContentLoaded", () => {
   user = cargarUsuario();
   if (!user) {
-    window.location.href = "login.html";
+    window.location.href = "index.html";
     return;
   }
+
   renderLista();
 
-  $("btn-agregar").addEventListener("click", abrirMapa);
-  $("btn-cerrar-mapa").addEventListener("click", cerrarMapa);
-  $("btn-confirmar-mapa").addEventListener("click", confirmarHectarea);
-  $("map-modal").addEventListener("click", (e) => {
-    if (e.target === $("map-modal")) cerrarMapa();
+  document.getElementById("btn-agregar").addEventListener("click", abrirModal);
+  document.getElementById("btn-cerrar-mapa").addEventListener("click", cerrarModal);
+  document.getElementById("btn-confirmar-mapa").addEventListener("click", confirmarHectarea);
+  document.getElementById("modal-mapa").addEventListener("click", (e) => {
+    if (e.target.id === "modal-mapa") cerrarModal();
   });
 });

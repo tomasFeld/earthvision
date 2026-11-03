@@ -1,67 +1,82 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earth Vision</title>
+    <title>Coordenadas</title>
     <link rel="stylesheet" href="coordenadas.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="coordenadas.js"></script>
+
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
 
-    <aside class="menu-lateral">
+
+
+    <div class="menu-lateral">
+
         <div class="top-bar">
-            <a href="hectareas.html">
-                <button class="menu-button">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-            </a>
-            <img src="logo2.png" alt="Logo" class="logo">
+            <a href="hectareas.html"> <button class="menu-button">←</button></a>
+           
+            <img src="logo2.png" alt="Logo satélite" class="logo">
         </div>
 
-        <div class="hectarea" id="hectarea-titulo">Hectarea 1</div>
+        <span class="hectarea">Hectarea</span>
+
+        
+
+
 
         <div class="fertilidad">
-            <span class="ferility-text" id="fertilidad-valor">Fertility: ...</span>
-        </div>
+           
+    <div class="tabla-contenedor">
 
-        <div class="tabla-contenedor">
-            <div class="tabla-fila">
-                <div class="col-izquierda"><div class="caja-gris" id="dato-ndvi">NDVI: --</div></div>
-                <div class="col-derecha"><div class="caja-gris" id="dato-ndmi">NDMI: --</div></div>
-            </div>
-            <div class="tabla-fila">
-                <div class="col-izquierda"><div class="caja-gris" id="dato-temp">Temp: --</div></div>
-                <div class="col-derecha"><div class="caja-gris" id="dato-prec">Lluvia: --</div></div>
-            </div>
-            <div class="tabla-fila">
-                <div class="col-izquierda"><div class="caja-gris" id="dato-lat">Lat: --</div></div>
-                <div class="col-derecha"><div class="caja-gris" id="dato-lng">Lng: --</div></div>
-            </div>
-            <div class="tabla-fila">
-                <div class="col-izquierda"><div class="caja-gris" id="dato-nivel">Nivel: --</div></div>
-                <div class="col-derecha"><div class="caja-gris" id="dato-fecha">--</div></div>
-            </div>
-        </div>
-    </aside>
 
-    <main class="hectareas-map">
-        <div class="map-bar-verde">
-            <span class="hectaera-map-text" id="mapa-titulo">Hectarea 1</span>
-        </div>
+        <span class="hectarea" id="hectarea-coords">Hectarea</span>
 
-        <div class="hectareas-buttonns">
-            <button class="btn-map" id="btn-ver-clima">Weather</button>
-            <button class="btn-map" id="btn-ver-analytics">Analytics</button>
-        </div>
+<div class="fertilidad">
+    <span class="ferility-text">Fertilidad Estimada: <strong id="fertilidad-valor">Cargando...</strong></span>
 
-        <div id="mapa-campo"></div>
-        <div id="mapa-fecha">Satelital (ArcGIS)</div>
-    </main>
+    <div class="tabla-contenedor" id="tabla-datos">
+      
+    </div>
+</div>
+    </div>
 
-    <script src="coordenadas.js"></script>
+
+
+
+
+</div>
+
+
+</div>
+    
+
+<div class="hectareas-map">
+    
+    <div class="map-bar-verde">
+        <span class="hectaera-map-text">Hectarea-1</span>
+    </div>
+    
+  
+    <div class="hectareas-buttonns">
+    
+    <button class="btn-map active" data-dias="7">7-Days</button>
+    <button class="btn-map" data-dias="30">30-Days</button>
+    <button class="btn-map" data-dias="365">1-Year</button>
+</div>
+
+<div id="mapa-campo"></div>
+<div id="mapa-fecha">Cargando...</div>
+
+
+    
+</div>
+
+
 </body>
 </html>

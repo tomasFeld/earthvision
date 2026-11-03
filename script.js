@@ -1,19 +1,7 @@
 const API = "http://localhost:3000";
 
-function normalizarUsuario(u) {
-  const fields = [];
-  for (let n = 1; n <= 4; n++) {
-    const sufijo = n === 1 ? "" : n;
-    const lat = u[`fieldCoordenatesLat${sufijo}`];
-    const lng = u[`fieldCoordenatesLng${sufijo}`];
-    if (lat !== undefined && lng !== undefined) {
-      fields.push({ lat: Number(lat), lng: Number(lng) });
-    }
-  }
-  return { email: u.email, fields };
-}
-
 document.addEventListener("DOMContentLoaded", () => {
+  // Elementos
   const pageWrapper = document.getElementById("pageWrapper");
   const triggerSignup = document.getElementById("triggerSignup");
   const loginTab = document.getElementById("loginTab");
@@ -29,6 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnOpenMap = document.getElementById("btn-open-map");
   const btnCloseMap = document.getElementById("btn-close-map");
   const mapModal = document.getElementById("map-modal");
+  const fieldAreaInput = document.getElementById("field-area");
+  const fieldCoordsInput = document.getElementById("field-coordinates");
 
   let map = null;
   let marker = null;
@@ -37,9 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const mostrar = (texto) => { if (responseText) responseText.textContent = texto; };
 
-  if (triggerSignup) triggerSignup.addEventListener("click", () => pageWrapper.classList.add("expanded"));
-  if (loginTab) loginTab.addEventListener("click", () => pageWrapper.classList.remove("expanded"));
-
+ 
+  //LOGIN
   if (btnLoginSubmit) {
     btnLoginSubmit.addEventListener("click", async () => {
       try {
@@ -58,7 +47,8 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
 
-        localStorage.setItem("user", JSON.stringify(normalizarUsuario(data.usuario)));
+
+        localStorage.setItem("user", JSON.stringify(data.usuario));
         window.location.href = "hectareas.html";
       } catch (err) {
         console.error(err);
@@ -67,6 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  //REGISTRO
   if (btnSignupSubmit) {
     btnSignupSubmit.addEventListener("click", async () => {
       if (!emailInput.value.trim() || !passwordInput.value) {
@@ -97,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
         mostrar(data.mensaje);
 
         if (res.ok) {
-          pageWrapper.classList.remove("expanded");
+          pageWrapper.classList.remove("expanded"); // volver al login
           passwordInput.value = "";
           repeatInput.value = "";
         }
@@ -108,6 +99,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+ 
+
+
+
   if (btnOpenMap && mapModal && btnCloseMap) {
     btnOpenMap.addEventListener("click", () => {
       mapModal.classList.add("active");
@@ -117,27 +112,42 @@ document.addEventListener("DOMContentLoaded", () => {
           map = L.map("map-container").setView([-34.6037, -58.3816], 13);
 
           L.tileLayer(
-            "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-            { attribution: "Tiles © Esri", maxZoom: 19 }
-          ).addTo(map);
+  "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+  {
+    attribution: "Tiles © Esri",
+    maxZoom: 19,
+  }
+).addTo(map);
 
-          L.tileLayer(
-            "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
-            { maxZoom: 19 }
-          ).addTo(map);
+L.tileLayer(
+  "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}",
+  { maxZoom: 19 }
+).addTo(map);
 
-          L.Control.geocoder({
-            defaultMarkGeocode: false,
-            placeholder: "Buscar calle o dirección...",
-            geocoder: L.Control.Geocoder.nominatim({ geocodingQueryParams: { countrycodes: "ar" } }),
-          })
-          .on("markgeocode", function (e) {
-            const centro = e.geocode.center;
-            if (marker) map.removeLayer(marker);
-            marker = L.marker(centro).addTo(map);
-            map.fitBounds(e.geocode.bbox);
-          })
-          .addTo(map);
+L.tileLayer(
+  "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
+  { maxZoom: 19 }
+).addTo(map);
+
+
+let marcador = null;
+
+L.Control.geocoder({
+  defaultMarkGeocode: false,
+  placeholder: "Buscar calle o dirección...",
+  geocoder: L.Control.Geocoder.nominatim({
+    geocodingQueryParams: { countrycodes: "ar" },
+  }),
+})
+  .on("markgeocode", function (e) {
+    const centro = e.geocode.center;
+
+    if (marcador) map.removeLayer(marcador);
+    marcador = L.marker(centro).addTo(map);
+
+    map.fitBounds(e.geocode.bbox);
+  })
+  .addTo(map);
 
           map.on("click", (e) => {
             const { lat, lng } = e.latlng;
@@ -146,6 +156,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (marker) marker.setLatLng(e.latlng);
             else marker = L.marker(e.latlng).addTo(map);
+
+            fieldCoordsInput.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+         
+            fieldAreaInput.value = "360000 m²";
 
             setTimeout(() => mapModal.classList.remove("active"), 600);
           });
