@@ -1,5 +1,6 @@
+const PAGINA_LOGIN = "index.html"; // cambialo si tu login se llama distinto
 const CLASE_BOTON = "hct_btn";
-const MAX_HECTAREAS = 4;            // cambialo si querés permitir más
+const MAX_HECTAREAS = 4;
 
 let user = null;
 let mapa = null;
@@ -22,7 +23,7 @@ function cargarUsuario() {
 
 function guardarUsuario() {
   localStorage.setItem("user", JSON.stringify(user));
-  // La primera hectárea vive en el server; las demás, solo en este navegador.
+  // La primera hectárea vive en el servidor; las demás, solo en este navegador.
   // El login vuelve a leerlas de esta clave.
   localStorage.setItem(`extraFields:${user.email}`, JSON.stringify(user.fields.slice(1)));
 }
@@ -32,20 +33,21 @@ function renderLista() {
   const lista = document.getElementById("lista-hectareas");
   lista.innerHTML = "";
 
-  if (user.fields.length === 0) {
-    lista.textContent = "Todavía no tenés hectáreas registradas.";
-    return;
-  }
-
   user.fields.forEach((f, i) => {
     const boton = document.createElement("button");
     boton.className = CLASE_BOTON;
     boton.textContent = `Hectarea ${i + 1}`;
     boton.addEventListener("click", () => {
+      localStorage.setItem("hectareaActiva", i);
       window.location.href = `coordenadas.html?id=${i}`;
     });
     lista.appendChild(boton);
   });
+
+  const btnAgregar = document.getElementById("btn-agregar");
+  const lleno = user.fields.length >= MAX_HECTAREAS;
+  btnAgregar.disabled = lleno;
+  btnAgregar.textContent = lleno ? "Máximo 4 hectáreas" : "Agregar hectareas";
 }
 
 // ---------- Mapa para elegir una hectárea ----------
@@ -59,9 +61,8 @@ function dibujarExistentes() {
 }
 
 function iniciarMapa() {
-  const centro = user.fields.length
-    ? [user.fields[user.fields.length - 1].lat, user.fields[user.fields.length - 1].lng]
-    : [-34.6037, -58.3816];
+  const ultima = user.fields[user.fields.length - 1];
+  const centro = ultima ? [ultima.lat, ultima.lng] : [-34.6037, -58.3816];
 
   mapa = L.map("mapa-nuevo").setView(centro, 14);
 
@@ -69,6 +70,7 @@ function iniciarMapa() {
     "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
     { attribution: "Tiles © Esri", maxZoom: 19 }
   ).addTo(mapa);
+
   L.tileLayer(
     "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
     { maxZoom: 19 }
@@ -84,6 +86,7 @@ function iniciarMapa() {
 
   mapa.on("click", (e) => {
     puntoElegido = { lat: e.latlng.lat, lng: e.latlng.lng };
+
     if (marcadorNuevo) marcadorNuevo.setLatLng(e.latlng);
     else marcadorNuevo = L.marker(e.latlng).addTo(mapa);
 
@@ -135,7 +138,7 @@ function confirmarHectarea() {
 document.addEventListener("DOMContentLoaded", () => {
   user = cargarUsuario();
   if (!user) {
-    window.location.href = "index.html";
+    window.location.href = PAGINA_LOGIN;
     return;
   }
 

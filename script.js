@@ -1,7 +1,6 @@
 const API = "http://localhost:3000";
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Elementos
   const pageWrapper = document.getElementById("pageWrapper");
   const triggerSignup = document.getElementById("triggerSignup");
   const loginTab = document.getElementById("loginTab");
@@ -25,10 +24,19 @@ document.addEventListener("DOMContentLoaded", () => {
   let selectedLat = null;
   let selectedLng = null;
 
-  const mostrar = (texto) => { if (responseText) responseText.textContent = texto; };
+  const mostrar = (texto) => {
+    if (responseText) responseText.textContent = texto;
+  };
 
- 
-  //LOGIN
+  // 1. Animación: expandir tarjeta (modo registro)
+  if (triggerSignup && pageWrapper) {
+    triggerSignup.addEventListener("click", () => pageWrapper.classList.add("expanded"));
+  }
+  if (loginTab && pageWrapper) {
+    loginTab.addEventListener("click", () => pageWrapper.classList.remove("expanded"));
+  }
+
+  // 2. LOGIN
   if (btnLoginSubmit) {
     btnLoginSubmit.addEventListener("click", async () => {
       try {
@@ -47,8 +55,27 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
 
+        const u = data.usuario;
 
-        localStorage.setItem("user", JSON.stringify(data.usuario));
+        // Hectárea 1: la que guarda el servidor
+        const principal = { lat: u.fieldCoordenatesLat, lng: u.fieldCoordenatesLng };
+
+        // Hectáreas 2, 3 y 4: las guardadas en este navegador
+        let extras = [];
+        try {
+          extras = JSON.parse(localStorage.getItem(`extraFields:${u.email}`)) || [];
+        } catch (e) {}
+
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            email: u.email,
+            password: passwordInput.value,
+            fields: [principal, ...extras],
+          })
+        );
+        localStorage.removeItem("hectareaActiva");
+
         window.location.href = "hectareas.html";
       } catch (err) {
         console.error(err);
@@ -57,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  //REGISTRO
+  // 3. REGISTRO
   if (btnSignupSubmit) {
     btnSignupSubmit.addEventListener("click", async () => {
       if (!emailInput.value.trim() || !passwordInput.value) {
@@ -88,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
         mostrar(data.mensaje);
 
         if (res.ok) {
-          pageWrapper.classList.remove("expanded"); // volver al login
+          pageWrapper.classList.remove("expanded");
           passwordInput.value = "";
           repeatInput.value = "";
         }
@@ -99,10 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
- 
-
-
-
+  // 4. MAPA (Leaflet)
   if (btnOpenMap && mapModal && btnCloseMap) {
     btnOpenMap.addEventListener("click", () => {
       mapModal.classList.add("active");
@@ -112,42 +136,29 @@ document.addEventListener("DOMContentLoaded", () => {
           map = L.map("map-container").setView([-34.6037, -58.3816], 13);
 
           L.tileLayer(
-  "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-  {
-    attribution: "Tiles © Esri",
-    maxZoom: 19,
-  }
-).addTo(map);
+            "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+            { attribution: "Tiles © Esri", maxZoom: 19 }
+          ).addTo(map);
 
-L.tileLayer(
-  "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}",
-  { maxZoom: 19 }
-).addTo(map);
+          L.tileLayer(
+            "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}",
+            { maxZoom: 19 }
+          ).addTo(map);
 
-L.tileLayer(
-  "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
-  { maxZoom: 19 }
-).addTo(map);
+          L.tileLayer(
+            "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
+            { maxZoom: 19 }
+          ).addTo(map);
 
-
-let marcador = null;
-
-L.Control.geocoder({
-  defaultMarkGeocode: false,
-  placeholder: "Buscar calle o dirección...",
-  geocoder: L.Control.Geocoder.nominatim({
-    geocodingQueryParams: { countrycodes: "ar" },
-  }),
-})
-  .on("markgeocode", function (e) {
-    const centro = e.geocode.center;
-
-    if (marcador) map.removeLayer(marcador);
-    marcador = L.marker(centro).addTo(map);
-
-    map.fitBounds(e.geocode.bbox);
-  })
-  .addTo(map);
+          L.Control.geocoder({
+            defaultMarkGeocode: false,
+            placeholder: "Buscar calle o dirección...",
+            geocoder: L.Control.Geocoder.nominatim({
+              geocodingQueryParams: { countrycodes: "ar" },
+            }),
+          })
+            .on("markgeocode", (e) => map.fitBounds(e.geocode.bbox))
+            .addTo(map);
 
           map.on("click", (e) => {
             const { lat, lng } = e.latlng;
@@ -157,9 +168,11 @@ L.Control.geocoder({
             if (marker) marker.setLatLng(e.latlng);
             else marker = L.marker(e.latlng).addTo(map);
 
-            fieldCoordsInput.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
-         
-            fieldAreaInput.value = "360000 m²";
+            // Estos campos pueden no existir en el HTML nuevo
+            if (fieldCoordsInput) fieldCoordsInput.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+            if (fieldAreaInput) fieldAreaInput.value = "360000 m²";
+
+            mostrar(`Campo seleccionado: ${lat.toFixed(5)}, ${lng.toFixed(5)}`);
 
             setTimeout(() => mapModal.classList.remove("active"), 600);
           });

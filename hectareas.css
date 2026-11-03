@@ -241,3 +241,75 @@ body {
   color: #000;
   background-color: #fff;
 }
+
+#lista-hectareas {
+  display: contents;
+}
+
+.modal-mapa {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.modal-mapa.active {
+  display: flex;
+}
+
+.modal-mapa-card {
+  width: calc(var(--u) * 800);
+  max-width: 94vw;
+  background-color: #0f2a14;
+  border: 2px solid #0f6b1a;
+  border-radius: calc(var(--u) * 16);
+  overflow: hidden;
+}
+
+.modal-mapa-header {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 10);
+  padding: calc(var(--u) * 12) calc(var(--u) * 16);
+  background-color: #0f6b1a;
+  color: #fff;
+  font-size: calc(var(--u) * 15);
+}
+
+.modal-mapa-header span {
+  flex: 1;
+}
+
+.modal-mapa-header button {
+  background-color: #fff;
+  color: #0f6b1a;
+  border: none;
+  border-radius: calc(var(--u) * 8);
+  padding: calc(var(--u) * 6) calc(var(--u) * 14);
+  font-size: calc(var(--u) * 15);
+  cursor: pointer;
+}
+
+.modal-mapa-header button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#btn-cerrar-mapa {
+  background: none;
+  color: #fff;
+  font-size: calc(var(--u) * 24);
+}
+
+#mapa-nuevo {
+  width: 100%;
+  height: calc(var(--u) * 430);
+}
+
+.leaflet-control-geocoder-form input {
+  color: #000;
+  background-color: #fff;
+}

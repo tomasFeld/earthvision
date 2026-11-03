@@ -1,111 +1,77 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Earth Vision</title>
     <link rel="stylesheet" href="hectareas.css">
-    <!-- En tu HTML <head> -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-
-
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
-<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 </head>
 <body>
 
-
-
-
-
-
 <div class="dashboard-container">
-
     <div class="panel-izquierdo">
         <div class="header-izquierdo">
             <div class="bloque-logo">
-              
               <img src="logo2.png" alt="">
-            
             </div>
         </div>
 
         <div class="contenido-panel">
-
           <div class="navbar">
             <a href="hectareas.html">
               <button class="home-button">
-                
                 <img src="homelogo.png" alt="home-image" width="60px">
                 <span class="texto-boton">Home</span>
-                
-                </button>
+              </button>
             </a>
             <a href="analytics.html">
               <button class="analytics-button">
                 <img src="analitycslogo.png" alt="analizis-image" width="60px">
                 <span class="texto-boton">Analytics</span>
-                
               </button>
             </a>
             <a href="weather.html">
               <button>
                 <img src="weatherlogo.png" alt="weather-image" width="60px">
                 <span class="texto-boton">Weather</span>
-                
               </button>
             </a>
             <a href="settings.html">
               <button>
                 <img src="settingslogo.png" alt="settings-image" width="60px">
                 <span class="texto-boton">Setting</span>
-                
               </button>
             </a>
-  
-  
-  
           </div>
-  
-          
         </div>
-        
-            
-
-            
-        </div>
-     </div>
+    </div>
 </div>
 
-
 <div class="hectareas-hover">
-
-
-
   <span class="hct_text"> Your Fields:</span>
+
   <div class="hct_btn_hover">
-    
-
-    <button onclick="window.location.href='coordenadas.html'" class="hct_btn">
-      Hectarea 1
-    </button>
-
-      
-    <button class="agr_hct_button">Agregar hectareas</button>
-    
-
-    
+    <div id="lista-hectareas"></div>
+    <button class="agr_hct_button" id="btn-agregar">Agregar hectareas</button>
   </div>
 </div>
 
+<div id="modal-mapa" class="modal-mapa">
+  <div class="modal-mapa-card">
+    <div class="modal-mapa-header">
+      <span id="modal-mapa-texto">Hacé clic en el mapa para elegir tu nueva hectárea</span>
+      <button type="button" id="btn-confirmar-mapa" disabled>Confirmar</button>
+      <button type="button" id="btn-cerrar-mapa">&times;</button>
+    </div>
+    <div id="mapa-nuevo"></div>
+  </div>
+</div>
 
-
-    
-    
+<script src="hectareas.js"></script>
 </body>
 </html>

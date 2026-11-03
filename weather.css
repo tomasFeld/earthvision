@@ -206,3 +206,22 @@ body {
   font-size: calc(var(--u) * 14);
   color: #ddd;
 }
+
+
+#selector-campo {
+  background: transparent;
+  color: #fff;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  font-family: 'Poppins', sans-serif;
+  font-size: inherit;
+  font-style: italic;
+  font-weight: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+#selector-campo option {
+  background-color: #222;
+  color: #fff;
+}
