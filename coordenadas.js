@@ -1,7 +1,8 @@
 const API = "http://localhost:3000";
-const DIAS_ATRAS = 100; // provisorio: el clima de Earth Engine llega con retraso
+const RETRASO_DIAS = 0; // si el backend real falla con fechas recientes (clima con retraso), subilo
 
 let mapa = null;
+let ultimaPeticion = 0;
 
 function diaDelAnio(f) {
     const hoy = Date.UTC(f.getFullYear(), f.getMonth(), f.getDate());
@@ -59,6 +60,16 @@ function formatear(valor, decimales, unidad = "") {
     return typeof valor === "number" ? `${valor.toFixed(decimales)}${unidad}` : "--";
 }
 
+function limpiarDatos() {
+    poner("fertilidad-valor", "Fertility: ...");
+    poner("dato-ndvi", "NDVI: --");
+    poner("dato-ndmi", "NDMI: --");
+    poner("dato-temp", "Temp: --");
+    poner("dato-prec", "Lluvia: --");
+    poner("dato-nivel", "Nivel: --");
+    poner("dato-fecha", "--");
+}
+
 function mostrarDatos(datos, fechaTxt) {
     const fert = calcularFertilidad(datos);
     poner("fertilidad-valor", fert === null ? "Fertility: --" : `Fertility: ${fert}%`);
@@ -68,13 +79,14 @@ function mostrarDatos(datos, fechaTxt) {
     poner("dato-prec", `Lluvia: ${formatear(datos.precipitation, 1, " mm")}`);
     poner("dato-nivel", `Nivel: ${nivelFertilidad(fert)}`);
     poner("dato-fecha", fechaTxt);
-    return fert;
 }
 
-async function cargarDatos(field) {
+async function cargarDatos(field, dias) {
+    const peticion = ++ultimaPeticion;
+
     const ref = new Date();
-    ref.setDate(ref.getDate() - DIAS_ATRAS);
-    const fechaTxt = ref.toISOString().slice(0, 10);
+    ref.setDate(ref.getDate() - RETRASO_DIAS - dias);
+    const fechaTxt = ref.toLocaleDateString("sv-SE"); // AAAA-MM-DD en hora local
     const clave = `datos:${field.lat.toFixed(5)}:${field.lng.toFixed(5)}:${fechaTxt}`;
 
     const guardado = localStorage.getItem(clave);
@@ -83,14 +95,17 @@ async function cargarDatos(field) {
         return;
     }
 
-    poner("fertilidad-valor", "Fertility: ...");
+    limpiarDatos();
     try {
         const datos = await calcularDatos(field.lat, field.lng, ref);
-        if (mostrarDatos(datos, fechaTxt) !== null) {
+        if (calcularFertilidad(datos) !== null) {
             localStorage.setItem(clave, JSON.stringify(datos));
         }
+        if (peticion !== ultimaPeticion) return; // se eligió otro filtro mientras cargaba
+        mostrarDatos(datos, fechaTxt);
     } catch (error) {
         console.error(error);
+        if (peticion !== ultimaPeticion) return;
         poner("fertilidad-valor", "Fertility: --");
         poner("dato-nivel", "Nivel: Error");
     }
@@ -114,14 +129,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("hectarea-titulo").textContent = `Hectarea ${id + 1}`;
     document.getElementById("mapa-titulo").textContent = `Hectarea ${id + 1}`;
 
-    document.getElementById("btn-ver-clima").addEventListener("click", () => {
-        window.location.href = `weather.html?id=${id}`;
-    });
-
-    document.getElementById("btn-ver-analytics").addEventListener("click", () => {
-        window.location.href = `analytics.html?id=${id}`;
-    });
-
     if (!field) return;
 
     poner("dato-lat", `Lat: ${field.lat.toFixed(5)}`);
@@ -141,5 +148,15 @@ document.addEventListener("DOMContentLoaded", () => {
         fillOpacity: 0.9,
     }).addTo(mapa).bindTooltip(`Hectarea ${id + 1}`, { permanent: true, direction: "top" });
 
-    cargarDatos(field);
+    // Filtros de tiempo: 24 horas, 7 días, 30 días, 1 año
+    const botones = document.querySelectorAll("[data-dias]");
+    botones.forEach((boton) => {
+        boton.addEventListener("click", () => {
+            botones.forEach((b) => b.classList.remove("activo"));
+            boton.classList.add("activo");
+            cargarDatos(field, Number(boton.dataset.dias));
+        });
+    });
+
+    cargarDatos(field, 1); // arranca en "24 horas"
 });
