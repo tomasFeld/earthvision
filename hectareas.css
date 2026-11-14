@@ -1,315 +1,272 @@
-:root {
-  --u: min(100vw / 1366, 100vh / 768);
-  --sidebar-w: calc(var(--u) * 250);
-}
 
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
+
+/* BODY */
 
 body {
-  margin: 0;
-  height: 100vh;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  font-family: 'Poppins', sans-serif;
-  background-color: #f4f4f9;
-  background-image: url('background.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f9;
+    background-image: url('background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
+/* BARRA LATERAL */
+
+
+/* BARRA LATERAL */
 
 .dashboard-container {
-  display: flex;
-  width: var(--sidebar-w);
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6);
-  border-top-right-radius: calc(var(--u) * 90);
-  flex-shrink: 0;
+    display: flex;
+    width: 18.3vw;
+    height: 100vh;
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-top-right-radius: 6.59vw;
+    flex-shrink: 0;
 }
 
 .panel-izquierdo {
-  width: 100%;
-  padding: calc(var(--u) * 30);
-  display: flex;
-  flex-direction: column;
-  gap: calc(var(--u) * 20);
+    width: 100%;
+    height: 100%;
+    padding: 3.9vh 2.2vw;
+    display: flex;
+    flex-direction: column;
 }
+
+/* NAVBAR */
 
 .contenido-panel {
-  display: flex;
-  align-items: flex-start;
+    display: flex;
+    width: 100%;
 }
 
+
 .navbar {
-  display: flex;
-  flex-direction: column;
-  gap: calc(var(--u) * 55);
-  flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    margin-top: 3.5vh;
+    gap: 6.5vh;
+
+    flex-shrink: 0;
 }
 
 .navbar a {
-  text-decoration: none;
+    display: block;
+    width: 100%;
+    text-decoration: none;
 }
 
 .navbar button {
-  display: flex;
-  align-items: center;
-  gap: calc(var(--u) * 20);
-  padding: calc(var(--u) * 2) calc(var(--u) * 15);
-  border: none;
-  border-radius: calc(var(--u) * 30);
-  background-color: transparent;
-  cursor: pointer;
-  line-height: 1;
-  white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    width: 100%;
+    height: 7.5vh;
+
+    gap: 1vw;
+    padding: 0.5vh 1.2vw;
+
+    border: none;
+    border-radius: 3vw;
+    background-color: transparent;
+
+    cursor: pointer;
+    line-height: 1;
+    white-space: nowrap;
 }
 
 .navbar button img {
-  width: calc(var(--u) * 80);
-  height: calc(var(--u) * 70);
-  flex-shrink: 0;
-  object-fit: contain;
-  display: block;
+    width: 3vw;
+    height: 5.5vh;
+
+    flex-shrink: 0;
+    object-fit: contain;
+    display: block;
 }
 
 .navbar .texto-boton {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-               'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  color: #f4f4f9;
-  font-size: calc(var(--u) * 18);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular',
+        'Lucida Grande', 'Lucida Sans Unicode',
+        Geneva, Verdana, sans-serif;
+
+    color: #f4f4f9;
+    font-size: 1.15vw;
 }
 
 .navbar .home-button,
 .navbar button:hover {
-  background-color: #30ee17;
+    background-color: #0d6e17;
 }
+
+
 
 .bloque-logo img {
-  width: calc(var(--u) * 120);
-  max-width: 100%;
-  height: auto;
-  display: block;
+    width: 8.78vw;
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
+/* PANEL DE HECTAREAS */
 
 .hectareas-hover {
-  position: absolute;
-  top: 50%;
-  left: calc(var(--sidebar-w) + (100% - var(--sidebar-w)) / 2);
-  transform: translate(-50%, -50%);
-  width: calc(var(--u) * 600);
-  padding: calc(var(--u) * 30) calc(var(--u) * 20);
-  background-color: rgba(0, 0, 0, 0.6);
-  color: white;
-  border-radius: calc(var(--u) * 50);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: calc(var(--u) * 20);
+    position: absolute;
+    top: 50%;
+    left: 59.15vw;
+    transform: translate(-50%, -50%);
+    width: 43.92vw;
+    padding: 15vh 1.46vw;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border-radius: 5vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.6vh;
 }
 
 .hct_text {
-  width: 80%;
-  background-color: rgb(13, 110, 23);
-  color: #fff;
-  text-align: center;
-  padding: calc(var(--u) * 10) 0;
-  border-radius: calc(var(--u) * 15);
-  font-size: calc(var(--u) * 24);
-  font-style: italic;
-  font-weight: 500;
+    width: 100%;
+    background-color: #0D6E08;
+    color: #fff;
+    text-align: center;
+    padding: 1.3vh 0;
+    
+    font-size: 1.76vw;
+    font-style: italic;
+    font-weight: 500;
 }
 
 .hct_btn_hover {
-  width: calc(var(--u) * 450);
-  max-height: calc(var(--u) * 380);
-  overflow-y: auto;
-  background-color: rgba(0, 0, 0, 0.8);
-  border-radius: calc(var(--u) * 40);
-  padding: calc(var(--u) * 30) calc(var(--u) * 20);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: calc(var(--u) * 15);
+    width: 80%;
+    max-height: 49.5vh;
+    overflow-y: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 5vw;
+    padding: 3.9vh 1.46vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.95vh;
 }
 
 #lista-hectareas {
-  display: contents;
+    display: contents;
 }
+
+/* BOTONES DE HECTAREAS */
 
 .hct_btn,
 .agr_hct_button {
-  width: 100%;
-  max-width: calc(var(--u) * 350);
-  height: calc(var(--u) * 45);
-  border: none;
-  border-radius: calc(var(--u) * 50);
-  color: #fff;
-  font-family: 'Poppins', sans-serif;
-  font-size: calc(var(--u) * 16);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  flex-shrink: 0;
+    width: 100%;
+    max-width: 25.62vw;
+    height: 5.86vh;
+    border: none;
+    border-radius: 3.66vw;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.17vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    flex-shrink: 0;
 }
 
 .hct_btn {
-  background-color: #6d696a;
+    background-color: #6d696a;
 }
 
 .hct_btn:hover {
-  background-color: #a09c9d;
+    background-color: #a09c9d;
 }
 
 .agr_hct_button {
-  background-color: rgb(13, 110, 23);
+    background-color: rgb(13, 110, 23);
 }
 
+/* MODAL DEL MAPA */
 
 .modal-mapa {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: 5000;
-  align-items: center;
-  justify-content: center;
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 5000;
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-mapa.active {
-  display: flex;
+    display: flex;
 }
 
 .modal-mapa-card {
-  width: calc(var(--u) * 900);
-  max-width: 94vw;
-  background-color: #0f2a14;
-  border: 2px solid #0f6b1a;
-  border-radius: calc(var(--u) * 16);
-  overflow: hidden;
+    width: 58.57vw;
+    max-width: 94vw;
+    background-color: #0f2a14;
+    border: 0.15vw solid #0f6b1a;
+    border-radius: 1.17vw;
+    overflow: hidden;
 }
 
 .modal-mapa-header {
-  display: flex;
-  align-items: center;
-  gap: calc(var(--u) * 10);
-  padding: calc(var(--u) * 12) calc(var(--u) * 16);
-  background-color: #0f6b1a;
-  color: #fff;
-  font-size: calc(var(--u) * 15);
+    display: flex;
+    align-items: center;
+    gap: 0.73vw;
+    padding: 1.56vh 1.17vw;
+    background-color: #0f6b1a;
+    color: #fff;
+    font-size: 1.1vw;
 }
 
 .modal-mapa-header span {
-  flex: 1;
+    flex: 1;
 }
 
 .modal-mapa-header button {
-  background-color: #fff;
-  color: #0f6b1a;
-  border: none;
-  border-radius: calc(var(--u) * 8);
-  padding: calc(var(--u) * 6) calc(var(--u) * 14);
-  font-size: calc(var(--u) * 15);
-  cursor: pointer;
+    background-color: #fff;
+    color: #0f6b1a;
+    border: none;
+    border-radius: 0.59vw;
+    padding: 0.78vh 1.03vw;
+    font-size: 1.1vw;
+    cursor: pointer;
 }
 
 .modal-mapa-header button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 #btn-cerrar-mapa {
-  background: none;
-  color: #fff;
-  font-size: calc(var(--u) * 24);
+    background: none;
+    color: #fff;
+    font-size: 1.76vw;
 }
 
 #mapa-nuevo {
-  width: 100%;
-  height: calc(var(--u) * 450);
+    width: 100%;
+    height: 56vh;
 }
 
 .leaflet-control-geocoder-form input {
-  color: #000;
-  background-color: #fff;
-}
-
-#lista-hectareas {
-  display: contents;
-}
-
-.modal-mapa {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 5000;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.75);
-}
-
-.modal-mapa.active {
-  display: flex;
-}
-
-.modal-mapa-card {
-  width: calc(var(--u) * 800);
-  max-width: 94vw;
-  background-color: #0f2a14;
-  border: 2px solid #0f6b1a;
-  border-radius: calc(var(--u) * 16);
-  overflow: hidden;
-}
-
-.modal-mapa-header {
-  display: flex;
-  align-items: center;
-  gap: calc(var(--u) * 10);
-  padding: calc(var(--u) * 12) calc(var(--u) * 16);
-  background-color: #0f6b1a;
-  color: #fff;
-  font-size: calc(var(--u) * 15);
-}
-
-.modal-mapa-header span {
-  flex: 1;
-}
-
-.modal-mapa-header button {
-  background-color: #fff;
-  color: #0f6b1a;
-  border: none;
-  border-radius: calc(var(--u) * 8);
-  padding: calc(var(--u) * 6) calc(var(--u) * 14);
-  font-size: calc(var(--u) * 15);
-  cursor: pointer;
-}
-
-.modal-mapa-header button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-#btn-cerrar-mapa {
-  background: none;
-  color: #fff;
-  font-size: calc(var(--u) * 24);
-}
-
-#mapa-nuevo {
-  width: 100%;
-  height: calc(var(--u) * 430);
-}
-
-.leaflet-control-geocoder-form input {
-  color: #000;
-  background-color: #fff;
+    color: #000;
+    background-color: #fff;
 }

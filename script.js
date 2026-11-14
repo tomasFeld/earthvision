@@ -68,7 +68,14 @@ responseText.textContent = data.mensaje;
 console.log(data);
 
 if (response.ok) {
+
+  
+    sessionStorage.setItem("user", JSON.stringify(data.usuario));
+
     window.location.href = "hectareas.html";
+
+
+    
 }
  
 
@@ -115,9 +122,23 @@ let lat = null;
 
 const map = L.map("map-container").setView([-34.6037, -58.3816], 10);
 
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: "&copy; OpenStreetMap"
-}).addTo(map);
+// Imágenes satelitales de Esri
+L.tileLayer(
+    "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    {
+        attribution: "Tiles © Esri",
+        maxZoom: 19
+    }
+).addTo(map);
+
+
+// Nombres de lugares y límites geográficos
+L.tileLayer(
+    "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
+    {
+        maxZoom: 19
+    }
+).addTo(map);
 
 let marker;
 

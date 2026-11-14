@@ -1,113 +1,174 @@
-const PAGINA_LOGIN = "index.html"; // cambialo si tu login se llama distinto
+const selectorCampo = document.getElementById("selector-campo");
 
-let pedidoActual = 0;
+const usuario = JSON.parse(sessionStorage.getItem("user"));
+console.log(usuario);
 
-// Cada número del clima se traduce a un emoji
-function icono(codigo) {
-  if (codigo === 0) return "☀️";
-  if (codigo <= 2) return "⛅";
-  if (codigo === 3) return "☁️";
-  if (codigo <= 48) return "🌫️";
-  if (codigo <= 67) return "🌧️";
-  if (codigo <= 77) return "❄️";
-  if (codigo <= 82) return "🌧️";
-  return "⛈️";
-}
+const campos = [];
 
-// Escribe un texto en un elemento del HTML
-function poner(id, valor) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = valor;
-}
+// cargamos y seleccionamos hectareas
+for (let i = 1; i <= 4; i++) {
+    console.log(campos);
 
-function limpiar() {
-  poner("hoy-icono", "⏳");
-  poner("hoy-temp", "--°C");
-  poner("hoy-viento", "💨 -- KMH");
-  poner("hoy-lluvia", "🌧️ -- MM");
-  poner("hoy-humedad", "💧 --%");
-  for (let i = 1; i <= 3; i++) {
-    const tarjeta = document.getElementById("dia-" + i);
-    if (tarjeta) tarjeta.textContent = "...";
-  }
-}
+    let numero = "";
 
-// Pide el clima de una ubicación y lo muestra
-async function cargarClima(lat, lng) {
-  const idPedido = ++pedidoActual; // evita que una respuesta lenta pise a una más nueva
-  limpiar();
-
-  const url =
-    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}` +
-    `&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code` +
-    `&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum` +
-    `&timezone=auto&forecast_days=4`;
-
-  try {
-    const respuesta = await fetch(url);
-    if (!respuesta.ok) throw new Error("HTTP " + respuesta.status);
-    const datos = await respuesta.json();
-    if (idPedido !== pedidoActual) return;
-
-    const hoy = datos.current;
-    const dias = datos.daily;
-
-    // Hoy
-    poner("hoy-icono", icono(hoy.weather_code));
-    poner("hoy-temp", Math.round(hoy.temperature_2m) + "°C");
-    poner("hoy-viento", "💨 " + Math.round(hoy.wind_speed_10m) + " KMH");
-    poner("hoy-lluvia", "🌧️ " + Math.round(dias.precipitation_sum[0]) + " MM");
-    poner("hoy-humedad", "💧 " + hoy.relative_humidity_2m + "%");
-
-    // Los próximos 3 días (la posición 0 es hoy)
-    for (let i = 1; i <= 3; i++) {
-      const tarjeta = document.getElementById("dia-" + i);
-      if (!tarjeta) continue;
-
-      const fecha = new Date(dias.time[i] + "T00:00:00");
-      const nombre = fecha.toLocaleDateString("es-AR", { weekday: "short" });
-
-      tarjeta.innerHTML =
-        `<span class="dia-nombre">${nombre}</span>` +
-        `<span class="dia-icono">${icono(dias.weather_code[i])}</span>` +
-        `<span class="dia-temps">${Math.round(dias.temperature_2m_max[i])}°-${Math.round(dias.temperature_2m_min[i])}°</span>`;
+    if (i !== 1) {
+        numero = i;
     }
-  } catch (error) {
-    if (idPedido !== pedidoActual) return;
-    console.error(error);
-    poner("hoy-temp", "--°C");
-    poner("hoy-viento", "No se pudo cargar el clima");
-  }
+
+    const lat = usuario["fieldCoordenatesLat" + numero];
+    const lng = usuario["fieldCoordenatesLng" + numero];
+
+    if (lat != null && lng != null) {
+
+        campos.push({
+            lat: Number(lat),
+            lng: Number(lng)
+        });
+
+    }
+
 }
 
-// Al abrir la página
-document.addEventListener("DOMContentLoaded", () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  if (!user) {
-    window.location.href = PAGINA_LOGIN;
-    return;
-  }
+campos.forEach((campo, indice) => {
 
-  // Lista de hectáreas (acepta la sesión nueva y la vieja)
-  const campos = Array.isArray(user.fields)
-    ? user.fields
-    : [{ lat: user.fieldCoordenatesLat, lng: user.fieldCoordenatesLng }];
+    const opcion = document.createElement("option");
 
-  // Selector con una opción por hectárea
-  const selector = document.getElementById("selector-campo");
-  campos.forEach((c, i) => selector.add(new Option(`Campo ${i + 1}`, i)));
+    opcion.value = indice;
 
-  // Hectárea inicial: la última que abriste, o la primera
-  let id = Number(localStorage.getItem("hectareaActiva") ?? 0);
-  if (!campos[id]) id = 0;
-  selector.value = id;
+    opcion.textContent = "Hectárea " + (indice + 1);
 
-  cargarClima(campos[id].lat, campos[id].lng);
+    selectorCampo.appendChild(opcion);
 
-  // Al cambiar el selector, se carga el clima de la otra hectárea
-  selector.addEventListener("change", () => {
-    const nuevo = Number(selector.value);
-    localStorage.setItem("hectareaActiva", nuevo);
-    cargarClima(campos[nuevo].lat, campos[nuevo].lng);
-  });
 });
+
+selectorCampo.addEventListener("change", function() {
+
+    const indice = Number(selectorCampo.value);
+
+    const campoSeleccionado = campos[indice];
+
+    console.log(campoSeleccionado);
+    obtenerClima(campoSeleccionado);
+
+});
+
+const campoInicial = campos[Number(selectorCampo.value)];
+
+obtenerClima(campoInicial);
+
+
+// el fetcheo con open meteo
+
+
+async function obtenerClima(campo) {
+const url = `https://api.open-meteo.com/v1/forecast?latitude=${campo.lat}&longitude=${campo.lng}&current=temperature_2m,relative_humidity_2m,precipitation,wind_speed_10m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&forecast_days=4&timezone=auto`;
+
+
+const respuesta = await fetch(url);
+
+const datos = await respuesta.json();
+
+console.log(datos);
+const climaActual = datos.current;
+
+
+// mostramos en pantalla la informacion con diferntes variables de climaactual
+
+document.getElementById("hoy-icono").textContent =
+    obtenerIconoClima(climaActual.weather_code);
+
+console.log(climaActual.temperature_2m);
+
+document.getElementById("hoy-temp").textContent =
+    Math.round(climaActual.temperature_2m) + "°C";
+
+
+
+
+
+document.getElementById("hoy-viento").textContent =
+    "💨 " + climaActual.wind_speed_10m + " KMH";
+
+
+document.getElementById("hoy-lluvia").textContent =
+    "🌧️ " + climaActual.precipitation + " MM";
+
+
+document.getElementById("hoy-humedad").textContent =
+    "💧 " + climaActual.relative_humidity_2m + "%";
+
+
+
+
+// proximos tres dias
+const pronostico = datos.daily;
+console.log(pronostico);
+
+
+for (let i = 1; i <= 3; i++) {
+
+    console.log(pronostico.time[i]);
+    console.log(pronostico.temperature_2m_max[i]);
+    console.log(pronostico.temperature_2m_min[i]);
+
+    const tarjeta = document.getElementById("dia-" + i);
+    tarjeta.innerHTML = '<span class="dia-nombre"></span>';
+
+
+    const fecha = new Date(pronostico.time[i] + "T12:00:00");
+
+const nombreDia = fecha.toLocaleDateString("es-AR", {
+    weekday: "long"
+});
+
+tarjeta.querySelector(".dia-nombre").textContent = nombreDia;
+
+
+
+const maxima = pronostico.temperature_2m_max[i];
+const minima = pronostico.temperature_2m_min[i];
+
+const codigoClima = pronostico.weather_code[i];
+
+const icono = obtenerIconoClima(codigoClima);
+
+const iconoHTML = document.createElement("span");
+
+iconoHTML.classList.add("dia-icono");
+
+iconoHTML.textContent = icono;
+
+tarjeta.appendChild(iconoHTML);
+
+tarjeta.innerHTML += `
+    <div class="dia-temps">
+        ${Math.round(maxima)}° / ${Math.round(minima)}°
+    </div>
+`;
+
+}
+
+// convertimos los numeros que nos da open meteo en emojis para mostrar
+
+function obtenerIconoClima(codigo) {
+
+    if (codigo === 0) return "☀️";
+
+    if (codigo <= 3) return "🌤️";
+
+    if (codigo === 45 || codigo === 48) return "🌫️";
+
+    if ([51, 53, 55, 56, 57].includes(codigo)) return "🌦️";
+
+    if ([61, 63, 65, 66, 67, 80, 81, 82].includes(codigo)) return "🌧️";
+
+    if ([71, 73, 75, 77, 85, 86].includes(codigo)) return "❄️";
+
+    if ([95, 96, 99].includes(codigo)) return "⛈️";
+
+    return "🌡️";
+}
+
+
+
+}

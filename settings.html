@@ -1,52 +1,62 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earth Vision</title>
+    <title>Earth Vision - Configuración</title>
+
     <link rel="stylesheet" href="settings.css">
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet">
+    
 </head>
+
 <body>
 
 <div class="dashboard-container">
 
     <div class="panel-izquierdo">
+
         <div class="header-izquierdo">
             <div class="bloque-logo">
-              <img src="logo2.png" alt="">
+                <img src="logo2.png" alt="Earth Vision">
             </div>
         </div>
 
         <div class="contenido-panel">
 
-          <div class="navbar">
-            <a href="hectareas.html">
-              <button class="home-button">
-                <img src="homelogo.png" alt="home-image" width="60px">
-                <span class="texto-boton">Home</span>
-              </button>
-            </a>
-            <a href="analytics.html">
-              <button class="analytics-button">
-                <img src="analitycslogo.png" alt="analizis-image" width="60px">
-                <span class="texto-boton">Analytics</span>
-              </button>
-            </a>
-            <a href="weather.html">
-              <button class="weather-button">
-                <img src="weatherlogo.png" alt="weather-image" width="60px">
-                <span class="texto-boton">Weather</span>
-              </button>
-            </a>
-            <a href="settings.html">
-              <button class="setting-button">
-                <img src="settingslogo.png" alt="settings-image" width="60px">
-                <span class="texto-boton">Setting</span>
-              </button>
-            </a>
-          </div>
+            <div class="navbar">
 
+                <a href="hectareas.html">
+                    <button class="home-button">
+                        <img src="homelogo.png" alt="Inicio">
+                        <span class="texto-boton">Inicio</span>
+                    </button>
+                </a>
+
+                <a href="analytics.html">
+                    <button class="analytics-button">
+                        <img src="analitycslogo.png" alt="Mercado">
+                        <span class="texto-boton">Mercado</span>
+                    </button>
+                </a>
+
+                <a href="weather.html">
+                    <button class="weather-button">
+                        <img src="weatherlogo.png" alt="Clima">
+                        <span class="texto-boton">Clima</span>
+                    </button>
+                </a>
+
+                <a href="settings.html">
+                    <button class="setting-button">
+                        <img src="settingslogo.png" alt="Configuración">
+                        <span class="texto-boton">Configuración</span>
+                    </button>
+                </a>
+
+            </div>
         </div>
 
         <div class="config-hover">
@@ -58,22 +68,51 @@
                     <img src="Img/flecha-correcta-3d-icon-png-download-4206421.png" alt="">
                 </button>
 
-                <button class="config-button" id="abrir-perfil">
-                    <span class="texto-boton">Perfil</span>
-                    <img src="Img/flecha-correcta-3d-icon-png-download-4206421.png" alt="">
-                </button>
-
                 <button class="config-button" id="abrir-idioma">
                     <span class="texto-boton">Idioma</span>
                     <img src="Img/flecha-correcta-3d-icon-png-download-4206421.png" alt="">
                 </button>
 
                 <button class="config-button" id="abrir-modal">
-                    <span class="texto-boton">Cerrar sesion</span>
+                    <span class="texto-boton">Cerrar sesión</span>
                     <img src="Img/flecha-correcta-3d-icon-png-download-4206421.png" alt="">
                 </button>
 
             </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- VENTANA USUARIO -->
+
+<div class="modal-overlay" id="modal-usuario">
+
+    <div class="modal-sesion">
+
+        <button class="cerrar-modal" data-cerrar="modal-usuario">×</button>
+
+        <h2>Mi usuario</h2>
+        <p>Información de tu cuenta</p>
+
+        <div class="datos-cuenta">
+
+            <label for="nombre-usuario">Nombre de usuario</label>
+            <input type="text" id="nombre-usuario" placeholder="Tu nombre">
+
+            <label for="email-usuario">Correo electrónico</label>
+            <input type="email" id="email-usuario" readonly>
+
+            <label for="password-usuario">Nueva contraseña</label>
+            <input type="password" id="password-usuario"
+                   placeholder="Dejar vacío para no cambiarla">
+
+            <p id="mensaje-usuario"></p>
+
+            <button class="boton-confirmar" id="guardar-usuario">
+                Guardar cambios
+            </button>
 
         </div>
 
@@ -81,207 +120,61 @@
 </div>
 
 
-
-<div class="modal-overlay" id="modal-cerrar-sesion">
-  <div class="modal-sesion">
-      <button class="cerrar-modal" id="cancelar-x" aria-label="Cerrar">×</button>
-
-      <h2>Cerrar Sesión</h2>
-      <p>¿Estás seguro de que querés cerrar sesión?</p>
-
-      <div class="botones-modal">
-          <button class="boton-cancelar" id="cancelar-sesion">Cancelar</button>
-          <button class="boton-confirmar" id="confirmar-sesion">Cerrar Sesión</button>
-      </div>
-  </div>
-</div>
-
-
-
-<div class="modal-overlay" id="modal-usuario">
-  <div class="modal-sesion">
-      <button class="cerrar-modal" data-cerrar="modal-usuario">×</button>
-
-      <h2>Usuario</h2>
-      <p>Información de tu cuenta</p>
-
-      <div class="datos-cuenta">
-          <p><strong>Email:</strong> <span id="dato-email">...</span></p>
-          <p>
-              <strong>Contraseña:</strong>
-              <span id="dato-password">...</span>
-              <button type="button" id="ver-password" class="boton-cancelar" style="display:none;">Mostrar</button>
-          </p>
-          <p><strong>Hectáreas:</strong> <span id="dato-cantidad">0</span></p>
-          <div id="dato-lista"></div>
-      </div>
-
-      <button class="boton-cancelar" data-cerrar="modal-usuario">Cerrar</button>
-  </div>
-</div>
-
-
-<div class="modal-overlay" id="modal-perfil">
-  <div class="modal-sesion">
-      <button class="cerrar-modal" data-cerrar="modal-perfil">×</button>
-
-      <h2>Perfil</h2>
-      <p>Modificá tus datos personales</p>
-
-      <label for="nombre-perfil">Nombre</label>
-      <input type="text" id="nombre-perfil" placeholder="Tu nombre">
-
-      <label for="correo-perfil">Correo electrónico</label>
-      <input type="email" id="correo-perfil" readonly>
-
-      <button class="boton-confirmar" id="guardar-perfil">Guardar</button>
-  </div>
-</div>
-
-
+<!-- VENTANA IDIOMA -->
 
 <div class="modal-overlay" id="modal-idioma">
-  <div class="modal-sesion">
-      <button class="cerrar-modal" data-cerrar="modal-idioma">×</button>
 
-      <h2>Idioma</h2>
-      <p>Elegí el idioma de Earth Vision</p>
+    <div class="modal-sesion">
 
-      <select id="seleccionar-idioma">
-          <option value="es">Español</option>
-          <option value="en">English</option>
-          <option value="pt">Português</option>
-      </select>
+        <button class="cerrar-modal" data-cerrar="modal-idioma">×</button>
 
-      <button class="boton-confirmar" id="guardar-idioma">Aceptar</button>
-  </div>
+        <img src="Img/idioma.png" alt="Idioma">
+
+        <h2>Idioma</h2>
+        <p>Elegí el idioma de Earth Vision</p>
+
+        <select id="seleccionar-idioma">
+            <option value="es">Español</option>
+            <option value="en">English</option>
+            <option value="pt">Português</option>
+        </select>
+
+        <button class="boton-confirmar" id="guardar-idioma">
+            Guardar idioma
+        </button>
+
+    </div>
 </div>
 
 
-<script>
+<!-- VENTANA CERRAR SESIÓN -->
+
+<div class="modal-overlay" id="modal-cerrar-sesion">
+
+    <div class="modal-sesion">
+
+        <button class="cerrar-modal" id="cancelar-x">×</button>
+
+        <h2>Cerrar sesión</h2>
+        <p>¿Estás seguro de que querés cerrar sesión?</p>
+
+        <div class="botones-modal">
+
+            <button class="boton-cancelar" id="cancelar-sesion">
+                Cancelar
+            </button>
+
+            <button class="boton-confirmar" id="confirmar-sesion">
+                Cerrar sesión
+            </button>
+
+        </div>
+
+    </div>
+</div>
 
 
-
-
-  const user = JSON.parse(localStorage.getItem("user"));
-
-  if (!user) {
-      window.location.href = PAGINA_LOGIN;
-  }
-
-
-  let fields = [];
-  if (user) {
-      if (Array.isArray(user.fields)) {
-          fields = user.fields;
-      } else if (user.fieldCoordenatesLat !== undefined) {
-          fields = [{ lat: user.fieldCoordenatesLat, lng: user.fieldCoordenatesLng }];
-      }
-  }
-
-
-  if (user) {
-      document.getElementById("dato-email").textContent = user.email;
-      document.getElementById("dato-cantidad").textContent = fields.length;
-
-      const lista = document.getElementById("dato-lista");
-      fields.forEach((f, i) => {
-          const linea = document.createElement("p");
-          linea.textContent =
-              `Hectarea ${i + 1}: ${Number(f.lat).toFixed(5)}, ${Number(f.lng).toFixed(5)}`;
-          lista.appendChild(linea);
-      });
-
-      const spanPassword = document.getElementById("dato-password");
-      const botonVer = document.getElementById("ver-password");
-      let visible = false;
-
-      function pintarPassword() {
-          spanPassword.textContent = visible ? user.password : "•".repeat(user.password.length);
-          botonVer.textContent = visible ? "Ocultar" : "Mostrar";
-      }
-
-      if (user.password) {
-          botonVer.style.display = "inline-block";
-          botonVer.addEventListener("click", () => {
-              visible = !visible;
-              pintarPassword();
-          });
-          pintarPassword();
-      } else {
-          spanPassword.textContent = "No disponible";
-      }
-
-    
-      document.getElementById("correo-perfil").value = user.email;
-      document.getElementById("nombre-perfil").value =
-          localStorage.getItem(`profileName:${user.email}`) || "";
-
-      document.getElementById("guardar-perfil").addEventListener("click", () => {
-          const nombre = document.getElementById("nombre-perfil").value.trim();
-          localStorage.setItem(`profileName:${user.email}`, nombre);
-          document.getElementById("modal-perfil").classList.remove("activo");
-      });
-
-
-      const selectIdioma = document.getElementById("seleccionar-idioma");
-      selectIdioma.value = localStorage.getItem("idioma") || "es";
-
-      document.getElementById("guardar-idioma").addEventListener("click", () => {
-          localStorage.setItem("idioma", selectIdioma.value);
-          document.getElementById("modal-idioma").classList.remove("activo");
-      });
-  }
-
-
-  const modalSesion = document.getElementById("modal-cerrar-sesion");
-
-  document.getElementById("abrir-modal").addEventListener("click", () => {
-      modalSesion.classList.add("activo");
-  });
-  document.getElementById("cancelar-sesion").addEventListener("click", () => {
-      modalSesion.classList.remove("activo");
-  });
-  document.getElementById("cancelar-x").addEventListener("click", () => {
-      modalSesion.classList.remove("activo");
-  });
-  document.getElementById("confirmar-sesion").addEventListener("click", () => {
-      localStorage.removeItem("user");
-      window.location.href = "login.html";
-  });
-
-  
-  document.getElementById("abrir-usuario").addEventListener("click", () => {
-      document.getElementById("modal-usuario").classList.add("activo");
-  });
-  document.getElementById("abrir-perfil").addEventListener("click", () => {
-      document.getElementById("modal-perfil").classList.add("activo");
-  });
-  document.getElementById("abrir-idioma").addEventListener("click", () => {
-      document.getElementById("modal-idioma").classList.add("activo");
-  });
-
-
-  document.querySelectorAll("[data-cerrar]").forEach((boton) => {
-      boton.addEventListener("click", () => {
-          document.getElementById(boton.getAttribute("data-cerrar")).classList.remove("activo");
-      });
-  });
-
-
-  document.querySelectorAll(".modal-overlay").forEach((modal) => {
-      modal.addEventListener("click", (e) => {
-          if (e.target === modal) modal.classList.remove("activo");
-      });
-  });
-
-
-  document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-          document.querySelectorAll(".modal-overlay").forEach((m) => m.classList.remove("activo"));
-      }
-  });
-</script>
+<script src="configuracion.js"></script>
 
 </body>
 </html>
