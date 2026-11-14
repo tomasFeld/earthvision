@@ -5,6 +5,7 @@ const passwordInput = document.getElementById("password");
 const loginButton = document.getElementById("btnLoginSubmit");
 const signupButton = document.getElementById("btnSignupSubmit");
 
+
 const responseText = document.getElementById("response");
 
 
@@ -86,20 +87,25 @@ console.log(data);
 
 signupButton.addEventListener("click", function() {
 
+    console.log("Enviando registro al servidor...");
 
-  console.log("Enviando registro al servidor...");
     const email = emailInput.value;
     const password = passwordInput.value;
+    const repetirPassword = document.getElementById("repeat-password").value;
+    // Comprobar que las contraseñas coincidan
+    if (password !== repetirPassword) {
+        responseText.textContent = "Las contraseñas no coinciden.";
+        return;
+    }
 
     console.log("Email:", email);
-console.log("Password:", password);
 
-if (lat === null || lng === null) {
-    responseText.textContent = "Primero seleccioná un punto en el mapa.";
-    return;
-}
+    if (lat === null || lng === null) {
+        responseText.textContent = "Primero seleccioná un punto en el mapa.";
+        return;
+    }
 
-register(email, password, lng, lat);
+    register(email, password, lng, lat);
 
 });
 
