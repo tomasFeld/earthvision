@@ -448,6 +448,15 @@ h3 {
     background-color: #222;
 }
 
+
+#selected-coordinates {
+    padding: 12px;
+    color: #39ff14;
+    background: #1a1a1a;
+    font-size: 13px;
+    text-align: center;
+}
+
 .leaflet-control-geocoder-form input {
     color: #000 !important;
     background: #fff !important;
