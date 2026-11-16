@@ -155,7 +155,10 @@ body {
     gap: 2.6vh;
 }
 
-.buttons-config button {
+
+
+.config-button{
+
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -168,6 +171,32 @@ body {
     border: none;
     border-radius: 3.66vw;
     cursor: pointer;
+}
+
+.perfil-button{
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 25.62vw;
+    height: 17.42vh;
+
+    padding: 0 1.83vw;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: none;
+    border-radius: 3.66vw;
+    cursor: pointer;
+
+}
+
+.perfil-button .logo-perfil{
+
+    display: flex;
+    align-items: fl;
+
+    width: 10vw;
+    height: 10vh;
 }
 
 .buttons-config button:hover {
@@ -198,7 +227,7 @@ body {
     display: none;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: none;
 }
 
 .modal-overlay.activo {
@@ -209,10 +238,10 @@ body {
     position: relative;
     width: min(90%, 380px);
     padding: 30px 25px;
-    background-color: rgba(20, 20, 20, 0.95);
+    background-color: rgba(255, 255, 255, 0.7);
     border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 25px;
-    color: white;
+    border-radius: 40px;
+    color: rgb(0, 0, 0);
     font-family: 'Poppins', sans-serif;
     text-align: center;
 }
@@ -226,16 +255,16 @@ body {
 .modal-sesion p {
     margin: 0 0 25px;
     font-size: 13px;
-    color: #d0d0d0;
+    color: #000000;
 }
 
 .cerrar-modal {
     position: absolute;
     top: 8px;
-    right: 13px;
+    left: 13px;
     background: none;
     border: none;
-    color: white;
+    color: rgb(0, 0, 0);
     font-size: 25px;
     cursor: pointer;
 }
