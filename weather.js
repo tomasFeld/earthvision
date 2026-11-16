@@ -142,7 +142,7 @@ tarjeta.appendChild(iconoHTML);
 
 tarjeta.innerHTML += `
     <div class="dia-temps">
-        ${Math.round(maxima)}° / ${Math.round(minima)}°
+        ${Math.round(maxima)}° - ${Math.round(minima)}°
     </div>
 `;
 
