@@ -246,6 +246,17 @@ body {
     text-align: center;
 }
 
+.modal-sesion .logo-perfil{
+
+    width: 6vw;
+    height: auto;
+
+    display: flex;
+    justify-content: flex-start;
+
+    border-radius: 60px;
+}
+
 .modal-sesion h2 {
     margin: 0 0 12px;
     font-size: 22px;

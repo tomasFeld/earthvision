@@ -1,5 +1,4 @@
 
-const PAGINA_LOGIN = "index.html";
 
 // Recuperar usuario de la sesión
 const user = JSON.parse(sessionStorage.getItem("user"));
@@ -35,6 +34,14 @@ const nombreGuardado = localStorage.getItem(
 
 nombreUsuario.value = nombreGuardado || "";
 emailUsuario.value = user.email || "";
+
+
+
+
+// Abrir ventana de usuario
+document.getElementById("abrir-info").addEventListener("click", () => {
+    abrirModal("modal-info");
+});
 
 
 // Abrir ventana de usuario
