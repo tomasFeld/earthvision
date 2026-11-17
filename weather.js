@@ -5,6 +5,10 @@ console.log(usuario);
 
 const campos = [];
 
+
+
+
+
 // cargamos y seleccionamos hectareas
 for (let i = 1; i <= 4; i++) {
     console.log(campos);

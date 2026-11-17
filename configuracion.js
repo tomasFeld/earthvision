@@ -5,7 +5,7 @@ const user = JSON.parse(sessionStorage.getItem("user"));
 
 // Si no hay usuario, volver al login
 if (!user) {
-    window.location.href = PAGINA_LOGIN;
+    window.location.href = "login.html";
 }
 
 

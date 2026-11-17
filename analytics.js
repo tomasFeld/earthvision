@@ -1,6 +1,8 @@
 const API_GRANOS = "https://granosar.lfcaucino.workers.dev/api/v1";
 const CACHE_MIN = 5;
 
+
+
 const BOTONES = {
   "btn-soja": "soja",
   "btn-maiz": "maiz",

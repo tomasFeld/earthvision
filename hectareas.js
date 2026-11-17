@@ -9,6 +9,8 @@ let marcadorNuevo = null;
 let puntoElegido = null;
 
 
+
+
 // 1. CARGAR USUARIO
 
 function cargarUsuario() {
