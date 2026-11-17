@@ -89,10 +89,12 @@ signupButton.addEventListener("click", function() {
 
     console.log("Enviando registro al servidor...");
 
+
+    // lo del input se vuelve la variable del login y regisster.
     const email = emailInput.value;
     const password = passwordInput.value;
     const repetirPassword = document.getElementById("repeat-password").value;
-    // Comprobar que las contraseñas coincidan
+    
     if (password !== repetirPassword) {
         responseText.textContent = "Las contraseñas no coinciden.";
         return;
@@ -128,7 +130,7 @@ let lat = null;
 
 const map = L.map("map-container").setView([-34.6037, -58.3816], 10);
 
-// Imágenes satelitales de Esri
+// imágenes satelitales de Esri
 L.tileLayer(
     "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
     {
@@ -138,7 +140,7 @@ L.tileLayer(
 ).addTo(map);
 
 
-// Nombres de lugares y límites geográficos
+// nombres de lugares y límites geográficos
 L.tileLayer(
     "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
     {

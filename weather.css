@@ -27,7 +27,7 @@ body {
 
 .dashboard-container {
     display: flex;
-    width: 18.3vw;
+    width: 21.3vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.6);
     border-top-right-radius: 6.59vw;
@@ -56,8 +56,10 @@ body {
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-top: 3.5vh;
+
+    margin-top: 10vh;
     gap: 6.5vh;
+
     flex-shrink: 0;
 }
 
@@ -122,12 +124,22 @@ body {
 
 /* LOGO */
 
+.bloque-logo{
+    padding-left: 4.45vw;
+    padding-top: 8vh; /* 1. Sumas 2vh aquí para bajar el logo */
+   
+}
+
 .bloque-logo img {
-    width: 8.78vw;
+    width: 8vw;
     max-width: 100%;
     height: auto;
     display: block;
+
+    
+    
 }
+
 
 /* PANEL DEL CLIMA */
 
